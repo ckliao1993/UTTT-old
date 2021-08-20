@@ -1,2 +1,2 @@
-# Ultimate Tic Tac Toc
+# Ultimate Tic Tac Toe
 UTTT web game.
