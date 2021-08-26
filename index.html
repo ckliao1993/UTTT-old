@@ -1,6 +1,204 @@
 <!DOCTYPE html>
-<head>
-  <h1>hihihi</h1>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-</head>
-<body></body>
+<head></head>
+<body>
+    <div class="header">
+        <h1>Ultimate Tic Tac Toe</h1>
+    </div>
+    <div class="main">
+        <div class="board big">
+            <div class="cell top left">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell top center">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell top right">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell mid left">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell mid center">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell mid right">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell bottom left">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell bottom center">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+            <div class="cell bottom right">
+				<div class="board small">
+					<div class="top left"></div>
+					<div class="top center"></div>
+					<div class="top right"></div>
+					<div class="mid left"></div>
+					<div class="mid center"></div>
+					<div class="mid right"></div>
+					<div class="bottom left"></div>
+					<div class="bottom center"></div>
+					<div class="bottom right"></div>
+				</div>
+            </div>
+        </div>
+      </div>
+    <div class="footer">
+        <h3>okok?</h3>
+    </div>
+</body>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header, .footer {
+        text-align: center;
+        height: 10%;
+        background-color: blue;
+    }
+    .main {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .board {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "top-left top-center top-right"
+            "mid-left mid-center mid-right"
+            "bottom-left bottom-center bottom-right";
+        margin: auto;
+    }
+    .big {
+		width: 90%;
+		position: relative;
+    }
+	.big::after {
+		content: "";
+		padding-bottom: 100%;
+
+	}
+	.small {
+		width: 90%;
+		height: 90%;
+	}
+    .cell {
+        width: 100%;
+        height: 100%;
+		display: flex;
+		position: absolute;
+    }
+
+	@media only screen and (min-aspect-ratio: 1/1) {
+		.big {
+			max-width: 470px;
+		}
+	}
+
+    .top.left { grid-area: top-left; }
+    .top.center { grid-area: top-center; }
+    .top.right { grid-area: top-right; }
+    .mid.left { grid-area: mid-left; }
+    .mid.center { grid-area: mid-center; }
+    .mid.right { grid-area: mid-right; }
+    .bottom.left { grid-area: bottom-left; }
+    .bottom.center { grid-area: bottom-center; }
+    .bottom.right { grid-area: bottom-right; }
+
+	.top {border-bottom: 3px solid black;}
+	.bottom {border-top: 3px solid black;}
+	.left {border-right: 3px solid black;}
+	.right {border-left: 3px solid black;}
+
+</style>
