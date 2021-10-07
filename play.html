@@ -77,12 +77,13 @@
 						<i class="bi bi-person-circle"></i>
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="#">New game</a></li>
-						<li><a class="dropdown-item" href="#">Change theme</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="#">View my games</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_new_game">New game</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_update_game">Update game</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#add_item">Sign in</a></li>
-					</ul>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out">Sign out</a></li>					</ul>
 				</div>
 			</div>
 		</div>
@@ -271,7 +272,7 @@
 
 	<!-- Modal area -->
 	<div class="modal" tabindex="-1" id="create_link">
-		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
@@ -279,42 +280,52 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<div class="row">
-						<input type="text" value="http://asdfasdfasdf.asdfasdf" class="col w-100" readonly="true" onclick="this.select()">
-						<i class="col bi bi-clipboard"></i>
+					<div class="d-flex justify-content-end align-items-center gap-3">
+						<input id="invite_link" type="text" value="" class="form-control w-100 text-center" readonly onclick="this.select()">
+						<a href="#" id="btn_copy">
+							<i class="fs-3 bi bi-clipboard"></i>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal" tabindex="-1" id="add_item">
+	<div class="modal" tabindex="-1" id="m_log_in">
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<!-- <h5 class="modal-title">Modal title</h5> -->
-					<h2 class="fw-bold mb-0">Sign up for free</h2>
+					<h2 class="fw-bold mb-0">Log in</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-		
 				<div class="modal-body p-5 pt-0">
-					<form class="">
+					<form id="f_log_in">
 						<div class="form-floating mb-3">
-						<input id="username" type="text" class="form-control rounded-4" id="floatingInput" placeholder="Username">
-						<label for="floatingInput">Username</label>
+							<input type="text" class="form-control rounded-4" id="login_user" placeholder="Username">
+							<label for="login_user">Username</label>
 						</div>
 						<div class="form-floating mb-3">
-						<input id="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-						<label for="floatingPassword">Password</label>
+							<input type="password" class="form-control rounded-4" id="login_pwd" placeholder="Password">
+							<label for="login_pwd">Password</label>
 						</div>
-						<button id="btn_sign_up" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
-						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-						<hr class="my-4">
-						<h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-						<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">
-						<svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
-						Sign up with Twitter
-						</button>
+						<button id="btn_log_in" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Log in</button>
 					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" id="m_sign_out">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">Sign out</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5 pt-0">
+					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes sign me out</button>
+						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+					</div>
 				</div>
 			</div>
 		</div>

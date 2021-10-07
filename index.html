@@ -77,22 +77,24 @@
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
 						<li><a class="dropdown-item" href="#">View my games</a></li>
-						<li><a class="dropdown-item" href="#">New game</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_new_game">New game</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_update_game">Update game</a></li>
 						<li><a class="dropdown-item" href="#">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#log_in">Log in</a></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#log_out">Log out</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out">Sign out</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
-		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#start">Start a game</button>
+		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#m_start">Start a game</button>
+		<a href="/play.html">Go to play</a>
 	</main>
 
 	<!-- Modal area -->
-	<div class="modal" tabindex="-1" id="start">
+	<div class="modal" tabindex="-1" id="m_start">
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
@@ -101,26 +103,26 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<form id="sign_up">
+					<form id="f_register">
 						<div class="form-floating mb-3">
-							<input name="username" type="text" class="form-control rounded-4" id="signup_user" placeholder="Username">
-							<label for="singup_user">Username</label>
+							<input name="username" type="text" class="form-control rounded-4" id="register_user" placeholder="Username">
+							<label for="register_user">Username</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input name="password" type="password" class="form-control rounded-4" id="signup_pwd" placeholder="Password">
-							<label for="singup_pwd">Password</label>
+							<input name="password" type="password" class="form-control rounded-4" id="register_pwd" placeholder="Password">
+							<label for="register_pwd">Password</label>
 						</div>
-						<button id="btn_sign_up" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up & Play</button>
+						<button id="btn_register" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Register & Play</button>
 						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
 					</form>
 					<hr class="my-4">
 					<h2 class="fs-5 fw-bold mb-3">Already have a account?</h2>
-					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#log_in">Log in</button>
+					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
 			</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal" tabindex="-1" id="log_in">
+	<div class="modal" tabindex="-1" id="m_log_in">
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
@@ -128,33 +130,33 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<form id="sign_in">
+					<form id="f_log_in">
 						<div class="form-floating mb-3">
-							<input type="text" class="form-control rounded-4" id="signin_user" placeholder="Username">
-							<label for="signin_user">Username</label>
+							<input type="text" class="form-control rounded-4" id="login_user" placeholder="Username">
+							<label for="login_user">Username</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="password" class="form-control rounded-4" id="signin_pwd" placeholder="Password">
-							<label for="signin_pwd">Password</label>
+							<input type="password" class="form-control rounded-4" id="login_pwd" placeholder="Password">
+							<label for="login_pwd">Password</label>
 						</div>
-						<button id="btn_sign_in" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Log in</button>
+						<button id="btn_log_in" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Log in</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal" tabindex="-1" id="log_out">
+	<div class="modal" tabindex="-1" id="m_sign_out">
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 class="fw-bold mb-0">Log out</h2>
+					<h2 class="fw-bold mb-0">Sign out</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to log out?</h2>
+					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-						<button class="btn btn-secondary" type="button">Yes log me out</button>
-						<button class="btn btn-primary" type="button">Cancel</button>
+						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes sign me out</button>
+						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
