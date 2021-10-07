@@ -6,25 +6,12 @@
 	<!-- Add some CSS to change client UI -->
 	<style>
 		body {
-			/* min-height: 75rem; */
 			padding-top: 4.5rem;
 		}
+
 		html, body {
 			margin: 0;
 			height: 100%;
-		}
-
-		.small {
-			/* width: 90%;
-			height: 90%; */
-			/* width: 1remz; */
-		}
-		.cell {
-			/* width: 100%;
-			height: 100%;
-			display: flex;
-			position: absolute; */
-			
 		}
 
 		.top {border-bottom: 3px solid black;}
@@ -58,6 +45,10 @@
 			margin: 10% auto;
 		}
 	</style>
+	<!-- Vue.js -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<!-- VUE.js Change to this for production -->
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 	<!-- Bootstrap JS -->
@@ -68,11 +59,16 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- Custom js-->
 	<script src="index.js"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+	<script type="module" src="./firebase.js"></script>
+
 </head>
 <body class="bg-light">
 	<header class="py-3 mb-3 border-bottom fixed-top" style="background-color: #1e543d;">
 		<div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-			<a class="navbar-brand" href="#" style="color: #ffff7c;">Shopping list</a>
+			<a class="navbar-brand" href="#" style="color: #ffff7c;">UTTT</a>
 
 			<div class="d-flex flex-row-reverse">
 				<div class="flex-shrink-0 dropdown">
@@ -80,242 +76,121 @@
 						<i class="bi bi-person-circle"></i>
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="#">New project...</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Profile</a></li>
+						<li><a class="dropdown-item" href="#">View my games</a></li>
+						<li><a class="dropdown-item" href="#">New game</a></li>
+						<li><a class="dropdown-item" href="#">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#">Sign out</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#log_in">Log in</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#log_out">Log out</a></li>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
-		<!-- <div class="row g-0 top">
-			<div class="cell small col-4 left"></div>
-			<div class="cell small col-4 center"></div>
-			<div class="cell small col-4 right"></div>
-		</div>
-		<div class="row g-0 mid">
-			<div class="cell small col-4 left"></div>
-			<div class="cell small col-4 center"></div>
-			<div class="cell small col-4 right"></div>
-		</div>
-		<div class="row g-0 bottom">
-			<div class="cell small col-4 left"></div>
-			<div class="cell small col-4 center"></div>
-			<div class="cell small col-4 right"></div>
-		</div> -->
-		<div class="container board g-0">
-			<div class="row big g-0 top">
-				<div class="cell big col-4 left">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 center">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 right">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row big g-0 mid">
-				<div class="cell big col-4 left">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 center">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 right">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row big g-0 bottom">
-				<div class="cell big col-4 left">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 center">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-				<div class="cell big col-4 right">
-					<div class="board small">
-						<div class="row small g-0 top">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 mid">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-						<div class="row small g-0 bottom">
-							<div class="cell small col-4 left"></div>
-							<div class="cell small col-4 center"></div>
-							<div class="cell small col-4 right"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#start">Start a game</button>
 	</main>
-	<!-- <footer class="fixed-bottom">
-		<div class="d-flex flex-row-reverse">
-			<button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#add_item" style="border-radius: 1.2rem; font-size: 1.5rem; margin: 2rem;">
-				<i class="bi bi-plus-circle-fill"></i>
-				<i class="bi bi-plus"></i>
-			</button>
-		</div>
-	</footer> -->
 
 	<!-- Modal area -->
-	<div class="modal" tabindex="-1" id="add_item">
+	<div class="modal" tabindex="-1" id="start">
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Add new item.</h5>
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<!-- <h5 class="modal-title">Modal title</h5> -->
+					<h2 class="fw-bold mb-0">Create an account</h2>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
-					<form id="url_form">
-						<div class="mb-3">
-							<textarea type="url" class="form-control" id="url_item" rows="3" placeholder="Put some URL inside me..."></textarea>
+				<div class="modal-body p-5 pt-0">
+					<form id="sign_up">
+						<div class="form-floating mb-3">
+							<input name="username" type="text" class="form-control rounded-4" id="signup_user" placeholder="Username">
+							<label for="singup_user">Username</label>
 						</div>
+						<div class="form-floating mb-3">
+							<input name="password" type="password" class="form-control rounded-4" id="signup_pwd" placeholder="Password">
+							<label for="singup_pwd">Password</label>
+						</div>
+						<button id="btn_sign_up" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up & Play</button>
+						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
 					</form>
+					<hr class="my-4">
+					<h2 class="fs-5 fw-bold mb-3">Already have a account?</h2>
+					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#log_in">Log in</button>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" id="log_in">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">Log in</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="temp()">Close</button>
-					<button type="button submit" form="url_form" class="btn btn-primary" onclick="temp()">Save changes</button>
+				<div class="modal-body p-5 pt-0">
+					<form id="sign_in">
+						<div class="form-floating mb-3">
+							<input type="text" class="form-control rounded-4" id="signin_user" placeholder="Username">
+							<label for="signin_user">Username</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input type="password" class="form-control rounded-4" id="signin_pwd" placeholder="Password">
+							<label for="signin_pwd">Password</label>
+						</div>
+						<button id="btn_sign_in" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Log in</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal" tabindex="-1" id="log_out">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">Log out</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5 pt-0">
+					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to log out?</h2>
+					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						<button class="btn btn-secondary" type="button">Yes log me out</button>
+						<button class="btn btn-primary" type="button">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- <div class="modal" tabindex="-1" id="add_item">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">Sign up for free</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+		
+				<div class="modal-body p-5 pt-0">
+					<form class="">
+						<div class="form-floating mb-3">
+							<input id="username" type="text" class="form-control rounded-4" id="floatingInput" placeholder="Username">
+							<label for="floatingInput">Username</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input id="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
+							<label for="floatingPassword">Password</label>
+						</div>
+						<button id="btn_sign_up" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
+						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+						<hr class="my-4">
+						<h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
+						<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">
+						<svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
+						Sign up with Twitter
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> -->
 </body>
 </html>
