@@ -50,7 +50,7 @@ onAuthStateChanged(auth, (user) => {
 });
 
 // Sign up 
-////////////////////// should be header
+// $('#btn_sign_up').click(function(){
 $("#f_register").submit(function(e) {
 	e.preventDefault();
 	let info = {
@@ -84,9 +84,11 @@ $("#f_log_in").submit(function(e) {
 	console.log(info);
 	signInWithEmailAndPassword(auth, info.email, info.pwd)
 	.then((userCredential) => {
+		alert('Log in');
 		// Signed in 
 		const user = userCredential.user;
-		$('#m_log_in').modal('hide');
+		$('m_log_in').modal('hide');
+		window.location.replace('/../games.html');
 	})
 	.catch((error) => {
 		const errorCode = error.code;
@@ -119,7 +121,13 @@ function writeData (userinfo){
 
 	});
 }
-
+function updateGame(){
+	console.log(game_id);
+	let this_move = move + "A";
+	let updates = {};
+	updates['/games/' + game_id + '/moves'] = this_move;
+	update(ref(database), updates);
+}
 function makeGameId(){
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -134,9 +142,9 @@ function newGame(userinfo){
 	let game_url = window.location.origin + '/play.html?game=' + game_id;
 	console.log(game_url);
 	set(ref(database, 'games/' + game_id), {
-		p1 : userinfo.email,
+		p1 : userinfo.uid,
 		p2 : "",
-		moves : "",
+		move : "",
 	}).then(()=>{
 		window.location.replace(game_url);
 	});
@@ -145,10 +153,10 @@ function checkUser(){
 	console.log("11111111111" + userinfo);
 }
 
-// onValue(ref(database, '/games/' + game_id + '/moves'), (snapshot) => {
-// 	console.log("move:" + snapshot.val());
-// 	move = snapshot.val();
-// });
-// onValue(ref(database, '/games/' + game_id + '/p2'), (snapshot) => {
-// 	console.log("p2:" + snapshot.val() + "has accept your challenge!");
-// });
+onValue(ref(database, '/games/' + game_id + '/moves'), (snapshot) => {
+	console.log("move:" + snapshot.val());
+	move = snapshot.val();
+});
+onValue(ref(database, '/games/' + game_id + '/p2'), (snapshot) => {
+	console.log("p2:" + snapshot.val() + "has accept your challenge!");
+});

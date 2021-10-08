@@ -44,9 +44,21 @@
 			width: 80%;
 			margin: 10% auto;
 		}
+		.cell.small {
+			font-size: 2.5em;
+			text-align: center;
+		}
+
+		.bg {
+			background-color: #ffff5ece;
+		}
+		.allow {
+			cursor: pointer;
+		}
 	</style>
 	<!-- Vue.js -->
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+	<script src="https://unpkg.com/vue@3"></script>
 	<!-- VUE.js Change to this for production -->
 	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 	<!-- Bootstrap CSS -->
@@ -70,7 +82,7 @@
 <body class="bg-light">
 	<header class="py-3 mb-3 border-bottom fixed-top" style="background-color: #1e543d;">
 		<div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-			<a class="navbar-brand" href="#" style="color: #ffff7c;">UTTT</a>
+			<a class="navbar-brand" href="/../games.html" style="color: #ffff7c;">OOXX</a>
 			<div class="d-flex flex-row-reverse">
 				<div class="flex-shrink-0 dropdown">
 					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffff7c;">
@@ -80,7 +92,8 @@
 						<li><a class="dropdown-item" href="#">View my games</a></li>
 						<li><a class="dropdown-item" href="#" id="btn_new_game">New game</a></li>
 						<li><a class="dropdown-item" href="#" id="btn_update_game">Update game</a></li>
-						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
+						<li><a class="dropdown-item" href="#">How to play?</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_test">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</a></li>
 						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out">Sign out</a></li>					</ul>
@@ -89,10 +102,10 @@
 		</div>
 	</header>
 	<main>
-		<div class="container board g-0">
+		<div id="game" class="container board g-0">
 			<div class="row big g-0 top">
 				<div class="cell big col-4 left">
-					<div class="board small">
+					<div class="board small" data-boardno="1">
 						<div class="row small g-0 top">
 							<div data-cellno="1" class="cell small col-4 left"></div>
 							<div data-cellno="2" class="cell small col-4 center"></div>
@@ -111,7 +124,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 center">
-					<div class="board small">
+					<div class="board small" data-boardno="2">
 						<div class="row small g-0 top">
 							<div data-cellno="10" class="cell small col-4 left"></div>
 							<div data-cellno="11" class="cell small col-4 center"></div>
@@ -130,7 +143,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 right">
-					<div class="board small">
+					<div class="board small" data-boardno="3">
 						<div class="row small g-0 top">
 							<div data-cellno="19" class="cell small col-4 left"></div>
 							<div data-cellno="20" class="cell small col-4 center"></div>
@@ -151,7 +164,7 @@
 			</div>
 			<div class="row big g-0 mid">
 				<div class="cell big col-4 left">
-					<div class="board small">
+					<div class="board small" data-boardno="4">
 						<div class="row small g-0 top">
 							<div data-cellno="28" class="cell small col-4 left"></div>
 							<div data-cellno="29" class="cell small col-4 center"></div>
@@ -170,7 +183,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 center">
-					<div class="board small">
+					<div class="board small" data-boardno="5">
 						<div class="row small g-0 top">
 							<div data-cellno="37" class="cell small col-4 left"></div>
 							<div data-cellno="38" class="cell small col-4 center"></div>
@@ -189,7 +202,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 right">
-					<div class="board small">
+					<div class="board small" data-boardno="6">
 						<div class="row small g-0 top">
 							<div data-cellno="46" class="cell small col-4 left"></div>
 							<div data-cellno="47" class="cell small col-4 center"></div>
@@ -210,7 +223,7 @@
 			</div>
 			<div class="row big g-0 bottom">
 				<div class="cell big col-4 left">
-					<div class="board small">
+					<div class="board small" data-boardno="7">
 						<div class="row small g-0 top">
 							<div data-cellno="55" class="cell small col-4 left"></div>
 							<div data-cellno="56" class="cell small col-4 center"></div>
@@ -229,7 +242,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 center">
-					<div class="board small">
+					<div class="board small" data-boardno="8">
 						<div class="row small g-0 top">
 							<div data-cellno="64" class="cell small col-4 left"></div>
 							<div data-cellno="65" class="cell small col-4 center"></div>
@@ -248,7 +261,7 @@
 					</div>
 				</div>
 				<div class="cell big col-4 right">
-					<div class="board small">
+					<div class="board small" data-boardno="9">
 						<div class="row small g-0 top">
 							<div data-cellno="73" class="cell small col-4 left"></div>
 							<div data-cellno="74" class="cell small col-4 center"></div>
@@ -271,7 +284,7 @@
 	</main>
 
 	<!-- Modal area -->
-	<div class="modal" tabindex="-1" id="create_link">
+	<div class="modal" tabindex="-1" id="m_create_link">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
@@ -326,6 +339,49 @@
 						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes sign me out</button>
 						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" id="m_join">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<!-- <h5 class="modal-title">Modal title</h5> -->
+					<h2 class="fw-bold mb-0">User??? have challenge you!</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5 pt-0">
+					<form id="f_register">
+						<small class="text-muted">You don't have a account, register to accept the challenge</small>
+						<div class="form-floating mb-3 mt-3">
+							<input name="username" type="text" class="form-control rounded-4" id="register_user" placeholder="Username">
+							<label for="register_user">Username</label>
+						</div>
+						<div class="form-floating mb-3">
+							<input name="password" type="password" class="form-control rounded-4" id="register_pwd" placeholder="Password">
+							<label for="register_pwd">Password</label>
+						</div>
+						<button id="btn_register" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Register & Play</button>
+					</form>
+					<hr class="my-4">
+					<h2 class="fs-5 fw-bold mb-3">Already have a account?</h2>
+					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Toast area. -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div class="toast-container">
+			<div id="t_game_status" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-header">
+					<img src="..." class="rounded me-2" alt="...">
+					<strong class="me-auto">OOXX</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+				</div>
+				<div class="toast-body" id="t_msg">
 				</div>
 			</div>
 		</div>
