@@ -7,8 +7,11 @@ import { getDatabase,
     child,
 	update,
     onValue,
+	onChildAdded,
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
+
+// Loading gif: https://icons8.com/preloaders/
 
 // Firebase configuration
 const firebaseConfig = {
@@ -27,17 +30,18 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase(app);
 let game_id = new URL(location.href).searchParams.get("game");
-let game, piece, player;
+let game, piece, player, shine;
+
+$(document).ready(()=>{
+	$('#m_loading').modal('show');
+})
 
 onAuthStateChanged(auth, (user) => {
 	if (user) {
+		// User is signed in, see docs for a list of available properties
 		globalThis.userinfo = user;
 		console.log(userinfo);
-		// User is signed in, see docs for a list of available properties
-		const uid = user.uid;
-		getGame();
 	} else {
-		getGame();
 		// User is signed out
 		$('#m_join').modal('show');
 		$('#game').click(()=>{
@@ -47,15 +51,16 @@ onAuthStateChanged(auth, (user) => {
 });
 
 let url = window.location.href;
-$('div.board.small').click((event)=>{
-	makeAmove(event);
+$('div.cell.small').click((event)=>{
+	if($(event.target).parent().parent().hasClass('allow')){
+		makeAmove(event);
+		clearInterval(shine);
+		$('div.allow').toggleClass('bg', false).toggleClass('allow', false);
+	} else {
+		toast("It's not your turn, please wait for other opponent.");
+	}
 });
 
-$(document).ready(function() {
-	//Check if log in, show link, if not, show create account
-	// $('#create_link').modal('show');
-
-});
 
 $('#btn_new').click(function(){
 	writeData(userinfo);
@@ -74,60 +79,42 @@ $('#btn_copy').click(function(){
 	}, 3000);
 });
 
-async function getGame(){
-	console.log(game_id);
-	if(game_id){
-		onValue(ref(database, '/games/' + game_id), (snapshot) => {
-			game = snapshot.val();
-			if(userinfo){
-				checkGameStatus(game);
-			}
-		},{onlyOnce: true});
-	}
-}
-function checkGameStatus(game){
+function checkGameStatus(game, move){
 	if(game.p1 == userinfo.email){
-		player = 'circle';
-		piece = '<i class="bi bi-circle"></i>';
+		player = 0;
 
 		if(game.moves.length == 0){
-			setInterval(()=>{
+			shine = setInterval(()=>{
 				$("[data-boardno]").toggleClass('bg');
 			}, 1000);
-			$("[data-boardno]").toggleClass('allow');
+			$("[data-boardno]").toggleClass('allow', true);
 		}
 		if(game.p2 == ""){
 			$('#invite_link').val(url);
 			$('#m_create_link').modal('show');
-			$('#t_msg').text("Your opponent haven't accept your invite yet.");
-			$('#t_game_status').toast('show');
+			toast("Your opponent haven't accept your invite yet.");
 		} else {
-			$('#t_msg').text("Your opponent have accept your challenge!");
-			$('#t_game_status').toast('show');
+			toast("Your opponent have accept your challenge!");
 		}
 	} else if (game.p2 == userinfo.email){
-		player = 'x-lg';
-		piece = '<i class="bi bi-x-lg"></i>';
-	} else if (game.p2 == ""){
+		player = 1;
+	} else if (game.p2 == "" && userinfo !== ''){
 		joinGame(userinfo);
 	} else {
 		//spectator mode
 		alert('Sorry, somebody is already in this battle.');
 	}
+	for(let i in move){
+		draw(i, move[i]);
+	}
 }
 
 function makeAmove(event){
-	// let this_move = game.moves + event.target.dataset.cellno + ',';
-	// let updates = {};
-	// updates['/games/' + game_id + '/moves'] = this_move;
-	// update(ref(database), updates).then(()=>{});
-	let moves = ref(database, '/games/'+game_id+'/moves');
-	let new_move = push(moves);
-	set(new_move, event.target.dataset.cellno
-	).then(()=>{
-		console.log("OKKKKKKKKKKKKKKKKKKKKKKK");
-	});
-	$(event.target).html(piece);
+	$(event.target).html('<img src="loading.gif" style="width:100%; vertical-align:top;">');
+	let this_move = game.moves + event.target.dataset.cellno + ',';
+	let updates = {};
+	updates['/games/' + game_id + '/moves'] = this_move;
+	update(ref(database), updates).then(()=>{});
 }
 
 function joinGame(userinfo){
@@ -136,27 +123,53 @@ function joinGame(userinfo){
 		updates['/games/' + game_id + '/p2'] = userinfo.email;
 		update(ref(database), updates).then(()=>{
 			game.p2 = userinfo.email;
-			piece = '<i class="bi bi-x"></i>';
 		});
 	} else {
 		alert('Sorry, somebody is already in this battle.');
 	}
+}
 
+function draw(index, cellno){
+	let piece;
+	if(index % 2 == 0){
+		piece = '<i class="bi bi-circle"></i>'; //oo
+	} else {
+		piece = '<i class="bi bi-x-lg"></i>'; //xx
+	}
+	$('div[data-cellno="' + cellno + '"]').html(piece);
+}
+
+function toast(msg){
+	$('#t_msg').text(msg);
+	$('#t_game_status').toast('show');
 }
 
 onValue(ref(database, '/games/' + game_id), (snapshot) => {
-	let move = snapshot.val().moves;
-	let p1 = snapshot.val().p1;
-	let p2 = snapshot.val().p2;
-	let allow = move[move.length-1] % 9;
-	if((move.length % 2 == 0 && p1 == userinfo.email) || (move.length % 2 !== 0 && p2 == userinfo.email)){
-		// even, p1 turn
-		// odd, p2 turn
-		setInterval(()=>{
-			$("div[data-boardno="+allow+"]").toggleClass('bg');
-		}, 1000);
-		$("div[data-boardno="+allow+"]").toggleClass('allow');
+	$('#m_loading').modal('hide');
+	let move = snapshot.val().moves.split(',');
+	let cut_null = move.pop();
+	if(game){
+		// Game data exist, we have got a new move. Draw the new one.
+		game = snapshot.val();
+		let last_index = move.length-1;
+		let last_move = move[last_index];
+		draw(last_index, last_move);
+		let allow_area = last_move % 9;
+		if(move.length % 2 == player){
+			// This player's turn. (Game movement counts match player character.)
+			shine = setInterval(()=>{
+				$("div[data-boardno="+ allow_area +"]").toggleClass('bg');
+			}, 1000);
+			$("div[data-boardno="+ allow_area +"]").toggleClass('allow', true);
+
+		} else {
+			// Not your turn. Wait.
+			console.log('waiting...');
+		}
 	} else {
-		console.log("waiting");
+		// No game data, this page is new! Draw all pieces.
+		game = snapshot.val();
+		console.log(game);
+		checkGameStatus(game, move);
 	}
 });

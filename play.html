@@ -43,10 +43,14 @@
 			height: 80%;
 			width: 80%;
 			margin: 10% auto;
+			border-radius: 1rem;
 		}
 		.cell.small {
 			font-size: 2.5em;
 			text-align: center;
+		}
+		.cell.small:hover {
+			background-color: rgb(189, 189, 189);
 		}
 
 		.bg {
@@ -54,6 +58,12 @@
 		}
 		.allow {
 			cursor: pointer;
+		}
+		.bi-circle {
+			color: red;
+		}
+		.bi-x-lg {
+			color: blue;
 		}
 	</style>
 	<!-- Vue.js -->
@@ -369,6 +379,11 @@
 					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
 			</div>
 			</div>
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" id="m_loading">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down d-flex justify-content-center">
+			<span class="text-white fw-bolder fs-1 text-center">Loading game data...</span>
 		</div>
 	</div>
 
