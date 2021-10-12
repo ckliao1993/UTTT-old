@@ -29,6 +29,7 @@ const database = getDatabase(app);
 // Set common variable.
 const url = window.location.origin;
 let game_id = new URL(location.href).searchParams.get("game");
+let userinfo;
 console.log(game_id);
 
 // Auth state
