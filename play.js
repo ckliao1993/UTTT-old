@@ -54,7 +54,6 @@ onAuthStateChanged(auth, (user) => {
 		console.log(userinfo);
 	} else {
 		// User is signed out
-		$('#m_start').modal('show');
 		$('#game').click(()=>{
 			$('#m_start').modal('show');
 		});		
@@ -88,8 +87,9 @@ $('#btn_copy').click(function(){
 
 // Check who is this uer, if set, call light().
 function checkUserStatus(game){
-	console.log("checkUserStatus");
-	if(game.p1 == userinfo.email){
+	if(!userinfo){
+		$('#m_start').modal('show');
+	} else if (game.p1 == userinfo.email){
 		player = 0;
 		if(game.p2 == ""){
 			$('#invite_link').val(url);
@@ -102,7 +102,7 @@ function checkUserStatus(game){
 	} else if (game.p2 == userinfo.email){
 		player = 1;
 		light(player);
-	} else if (game.p2 == "" && userinfo !== ''){
+	} else if (game.p2 == ""){
 		joinGame(userinfo);
 	} else {
 		alert('Sorry, somebody is already in this battle.');
@@ -156,15 +156,12 @@ function makeAmove(event){
 
 // New user join game when no p2 is in game data.
 function joinGame(userinfo){
-	if(game.p2 == ""){
-		let updates = {};
-		updates['/games/' + game_id + '/p2'] = userinfo.email;
-		update(ref(database), updates).then(()=>{
-			game.p2 = userinfo.email;
-		});
-	} else {
-		alert('Sorry, somebody is already in this battle.');
-	}
+	let updates = {};
+	updates['/games/' + game_id + '/p2'] = userinfo.email;
+	update(ref(database), updates).then(()=>{
+		game.p2 = userinfo.email;
+	});
+	toast('Welcome to OOXX');
 }
 
 // Draw pieces depends on user character.

@@ -53,17 +53,20 @@ $("#f_register").submit(function(e) {
 		email : $('#register_user').val() + '@custom.com',
 		pwd : $('#register_pwd').val()
 	};
-
+	console.log(info);
 	createUserWithEmailAndPassword(auth, info.email, info.pwd)
 	.then((userCredential) => {
 		// Signed in 
 		const user = userCredential.user;
-		$('m_start').modal('hide');
-		if(!game_id){
-			newGame(userinfo);
+		$('#m_start').modal('hide');
+		if(game_id == null){
+			newGame(info);
+		} else {
+			location.reload();
 		}
 	})
 	.catch((error) => {
+		console.log(error.message);
 		alert('Register error, please try again');
 	});
 });
