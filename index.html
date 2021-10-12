@@ -3,33 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Add some CSS to change client UI -->
-	<style>
-		body {
-			padding-top: 4.5rem;
-		}
-
-		html, body {
-			margin: 0;
-			height: 100%;
-		}
-
-		.container {
-			width: 90vw !important;
-			height: 90vw;
-		}
-		main {
-			display: flex;
-			align-items: center;
-			height: 100%;
-		}
-		@media (min-width: 576px) {
-			.container {
-				height: 80vh;
-				width: 80vh !important;
-			}
-		}
-	</style>
 	<!-- Vue.js -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 	<!-- VUE.js Change to this for production -->
@@ -42,24 +15,24 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 	<!-- Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<!-- Custom js-->
-	<script src="index.js"></script>
+	<!-- Custom style sheet -->
+	<link rel="stylesheet" href="./header.css">
 	<!-- Firebase -->
 	<script type="module" src="./header.js"></script>
 
 </head>
-<body class="bg-light">
-	<header class="py-3 mb-3 border-bottom fixed-top" style="background-color: #1e543d;">
+<body class="bg-green">
+	<header class="py-3 mb-3 border-bottom fixed-top header">
 		<div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
-			<a class="navbar-brand" href="/../games.html" style="color: #ffff7c;">OOXX</a>
+			<a class="navbar-brand fw-bold fs-1 text-light lh-1 ad px-3" href="/../games.html">O O X X</a>
 			<div class="d-flex flex-row-reverse">
 				<div class="flex-shrink-0 dropdown">
-					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffff7c;">
-						<i class="bi bi-person-circle"></i>
+					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-light fs-2" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="bi bi-list"></i>
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
 						<li><a class="dropdown-item" href="/../games.html">View my games</a></li>
-						<li><a class="dropdown-item" href="#" id="btn_new_game">New game</a></li>
+						<li><a class="dropdown-item btn_new_game" href="#">New game</a></li>
 						<li><a class="dropdown-item" href="#">How to play?</a></li>
 						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
@@ -71,12 +44,21 @@
 		</div>
 	</header>
 	<main>
-		<span>Win three games of Tic Tac Toe in a row.
-			You may only play in the big field that
-			corresponds to the last small field your
-			opponent played. When your are sent to a
-			field that is already decided, you can
-			choose freely.</span>
+		<div class="container d-flex flex-column justify-content-center">
+			<h1 class="text-center title fw-bold ad">Ultimate Tic Tac Toe</h1>
+			<hr class="my-4">
+			<h3 class="text-center">- Instructions -</h3>
+			<span>Win three games of Tic Tac Toe in a row.
+				You may only play in the big field that
+				corresponds to the last small field your
+				opponent played. When your are sent to a
+				field that is already decided, you can
+				choose freely.</span>
+			<hr class="my-4">
+			<div class="d-grid">
+				<button class="btn btn-primary btn_new_game">Start Game</button>
+			</div>
+		</div>
 	</main>
 
 	<!-- Modal area -->

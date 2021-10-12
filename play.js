@@ -2,12 +2,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase
 import { getDatabase,
     ref,
 	set,
-    get,
-	push,
-    child,
 	update,
     onValue,
-	onChildAdded,
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
 
@@ -27,12 +23,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase(app);
+
+// Set common variable.
 const piece_0 = '<i class="bi bi-circle"></i>'; // oo
 const piece_1 = '<i class="bi bi-x-lg"></i>'; // xx
 let toast_no = 0;
 let game_id = new URL(location.href).searchParams.get("game");
-let game, player, shine, userinfo;
 let url = window.location.href;
+let game, player, shine, userinfo;
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -63,7 +61,6 @@ onAuthStateChanged(auth, (user) => {
 	}
 });
 
-
 // Cell action when click.
 $('div.cell.small').click((event)=>{
 	if($(event.target).parent().parent().hasClass('allow')){
@@ -76,7 +73,7 @@ $('div.cell.small').click((event)=>{
 });
 
 $('#btn_dark').click(()=>{
-	toast('helpppppppppppppppppppppppp');
+	toast("There's nothing here.");
 });
 
 // Copy icon click action
@@ -145,11 +142,15 @@ function makeAmove(event){
 	$(event.target).html('<img src="loading.gif" style="width:100%; vertical-align:top;">');
 	let updates = {};
 	let last = event.target.dataset.cellno;
+	let board = last / 9;
 	game.moves[last] = player;
-	updates['/games/' + game_id + '/moves'] = game.moves;
+	let win = checkGame(game.moves.slice(board*9, board*9+9));
+	if(win){game.sets[board] = win;}
+	updates['/games/' + game_id + '/moves'] = game.moves.join(',');
+	updates['/games/' + game_id + '/sets'] = game.sets.join(',');
 	updates['/games/' + game_id + '/now'] = player ? 0 : 1;
-	updates['/games/' + game_id + '/last'] = last;
 	updates['/games/' + game_id + '/next'] = last % 9;
+	updates['/games/' + game_id + '/last'] = last;
 	update(ref(database), updates).then(()=>{});
 }
 
@@ -204,14 +205,7 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	$('#m_loading').modal('hide');
 	$('#msg_user').text(snapshot.val().p1.split('@')[0] + " has challenge you!!");
 
-	// if(game){
-	// 	// Game data exist, we have got a new move. Draw the new one.
-	// 	draw(snapshot.val().moves[snapshot.val().last], snapshot.val().last);
-	// 	game = snapshot.val();
-	// } else {
-		// No game data, this page is new! Draw all pieces.
-
-		// Trying draw all pieces every time.
+	// Trying draw all pieces every time.
 	let board = 0;
 	game = snapshot.val();
 	game.sets = game.sets.split(',');
@@ -231,14 +225,12 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	}
 	for(let k = 0; k<80; k += 9){
 		let win = checkGame(game.moves.slice(k, k+9));
-		if(win){
-			game.sets[board] = win;
-		}
+		if(win){game.sets[board] = win;}
 		board ++;
 	}
 	let winner = checkGame(game.sets);
 	if(winner){
-		$('#msg_color').text(winner ? "BlUE WIN!": "RED WIN");
+		$('#msg_color').text(winner ? "BlUE WIN!": "RED WIN!");
 		$('#msg_con').text(winner ? game.p2.split('@')[0]+" WIN!!!" : game.p1.split('@')[0]+" WIN!!!");
 		$('#m_win').modal('show');
 		$('#game').click(()=>{
@@ -249,5 +241,4 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	}
 	console.log(game);
 	// }
-
 });

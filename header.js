@@ -1,17 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-analytics.js";
-import { getDatabase,
-	ref,
-	set,
-	update,
-	onValue,
-} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+import { getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 import { getAuth,
 	signOut,
-	setPersistence,
 	onAuthStateChanged,
-	signInWithCustomToken,
-	browserSessionPersistence,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
@@ -28,16 +20,17 @@ const firebaseConfig = {
 	measurementId: "G-6W6BMW36EB"
 };
 
-// Initialize Firebase
+// Initialize Firebase.
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
 const database = getDatabase(app);
+
+// Set common variable.
 const url = window.location.origin;
-let info = {}
 let game_id = new URL(location.href).searchParams.get("game");
-let move = "";
 console.log(game_id);
+
 // Auth state
 onAuthStateChanged(auth, (user) => {
 	if (user) {
@@ -104,8 +97,12 @@ $('#btn_sign_out').click(function(){
 });
 
 // Create a new game onclick.
-$('.btn_new_game').click(function(){
-	newGame(userinfo);
+$('.btn_new_game').click(()=>{
+	if(userinfo){
+		newGame(userinfo);
+	} else {
+		$('#m_start').modal('show');
+	}
 });
 
 // Generate random string for game ID.
@@ -128,7 +125,7 @@ function newGame(userinfo){
 		p2 : "",
 		now : 0,
 		next : 9,
-		last : "",
+		last : 81,
 		sets : ",,,,,,,,",
 		moves : ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
 	}).then(()=>{
