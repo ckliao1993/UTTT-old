@@ -14,16 +14,6 @@
 			height: 100%;
 		}
 
-		.top {border-bottom: 3px solid black;}
-		.bottom {border-top: 3px solid black;}
-		.left {border-right: 3px solid black;}
-		.right {border-left: 3px solid black;}
-
-		.small {border-width: 1px;}
-
-		.row{
-			height: 33.33%;
-		}
 		.container {
 			width: 90vw !important;
 			height: 90vw;
@@ -38,11 +28,6 @@
 				height: 80vh;
 				width: 80vh !important;
 			}
-		}
-		.board.small {
-			height: 80%;
-			width: 80%;
-			margin: 10% auto;
 		}
 	</style>
 	<!-- Vue.js -->
@@ -60,9 +45,7 @@
 	<!-- Custom js-->
 	<script src="index.js"></script>
 	<!-- Firebase -->
-	<script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-	<script type="module" src="./firebase.js"></script>
+	<script type="module" src="./header.js"></script>
 
 </head>
 <body class="bg-light">
@@ -75,22 +58,25 @@
 						<i class="bi bi-person-circle"></i>
 					</a>
 					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="#">View my games</a></li>
+						<li><a class="dropdown-item" href="/../games.html">View my games</a></li>
 						<li><a class="dropdown-item" href="#" id="btn_new_game">New game</a></li>
-						<li><a class="dropdown-item" href="#" id="btn_update_game">Update game</a></li>
 						<li><a class="dropdown-item" href="#">How to play?</a></li>
-						<li><a class="dropdown-item" href="#">Dark mode</a></li>
+						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
 						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</a></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out">Sign out</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a></li>
+						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a></li>					</ul>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
-		<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#m_start">Start a game</button>
-		<a href="/play.html">Go to play</a>
+		<span>Win three games of Tic Tac Toe in a row.
+			You may only play in the big field that
+			corresponds to the last small field your
+			opponent played. When your are sent to a
+			field that is already decided, you can
+			choose freely.</span>
 	</main>
 
 	<!-- Modal area -->
@@ -139,8 +125,11 @@
 							<input type="password" class="form-control rounded-4" id="login_pwd" placeholder="Password">
 							<label for="login_pwd">Password</label>
 						</div>
-						<button id="btn_log_in" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Log in</button>
+						<button id="btn_log_in" class="w-100 py-2 mb-2 btn btn-lg btn-outline-dark rounded-4" type="submit">Log in</button>
 					</form>
+					<hr class="my-4">
+					<h2 class="fs-5 fw-bold mb-3">Don't have an account? Join now!</h2>
+					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-toggle="modal" data-bs-target="#m_start">Register</button>
 				</div>
 			</div>
 		</div>
@@ -155,44 +144,13 @@
 				<div class="modal-body p-5 pt-0">
 					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes sign me out</button>
+						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes get me out</button>
 						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	<!-- <div class="modal" tabindex="-1" id="add_item">
-		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
-			<div class="modal-content rounded-5 shadow">
-				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 class="fw-bold mb-0">Sign up for free</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-		
-				<div class="modal-body p-5 pt-0">
-					<form class="">
-						<div class="form-floating mb-3">
-							<input id="username" type="text" class="form-control rounded-4" id="floatingInput" placeholder="Username">
-							<label for="floatingInput">Username</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input id="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-							<label for="floatingPassword">Password</label>
-						</div>
-						<button id="btn_sign_up" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Sign up</button>
-						<small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
-						<hr class="my-4">
-						<h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
-						<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="submit">
-						<svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"/></svg>
-						Sign up with Twitter
-						</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div> -->
+
 </body>
 </html>

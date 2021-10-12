@@ -113,13 +113,6 @@ $('#btn_update_game').click(function(){
 	updateGame();
 });
 
-
-function writeData (userinfo){
-	set(ref(database, 'users/' + userinfo.uid), {
-
-	});
-}
-
 function makeGameId(){
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

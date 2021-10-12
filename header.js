@@ -37,20 +37,22 @@ const url = window.location.origin;
 let info = {}
 let game_id = new URL(location.href).searchParams.get("game");
 let move = "";
-
+console.log(game_id);
 // Auth state
 onAuthStateChanged(auth, (user) => {
 	if (user) {
 		globalThis.userinfo = user;
 		// User is signed in, see docs for a list of available properties
-		const uid = user.uid;
+		$('#btn_to_signout').show();
+		$('#btn_to_login').hide();
 	} else {
 		// User is signed out
+		$('#btn_to_signout').hide();
+		$('#btn_to_login').show();
 	}
 });
 
 // Sign up 
-// $('#btn_sign_up').click(function(){
 $("#f_register").submit(function(e) {
 	e.preventDefault();
 	let info = {
@@ -58,17 +60,16 @@ $("#f_register").submit(function(e) {
 		pwd : $('#register_pwd').val()
 	};
 
-	console.log(info);
 	createUserWithEmailAndPassword(auth, info.email, info.pwd)
 	.then((userCredential) => {
 		// Signed in 
 		const user = userCredential.user;
 		$('m_start').modal('hide');
-		newGame(userinfo);
+		if(!game_id){
+			newGame(userinfo);
+		}
 	})
 	.catch((error) => {
-		const errorCode = error.code;
-		const errorMessage = error.message;
 		alert('Register error, please try again');
 	});
 });
@@ -81,19 +82,14 @@ $("#f_log_in").submit(function(e) {
 		pwd : $('#login_pwd').val()
 	};
 
-	console.log(info);
 	signInWithEmailAndPassword(auth, info.email, info.pwd)
 	.then((userCredential) => {
-		alert('Log in');
 		// Signed in 
 		const user = userCredential.user;
-		$('m_log_in').modal('hide');
-		window.location.replace('/../games.html');
+		$('#m_log_in').modal('hide');
 	})
 	.catch((error) => {
-		const errorCode = error.code;
-		const errorMessage = error.message;
-		alert(errorMessage);
+		alert('Log in error, please try again.');
 	});
 });
 
@@ -101,33 +97,18 @@ $("#f_log_in").submit(function(e) {
 $('#btn_sign_out').click(function(){
 	signOut(auth).then(() => {
 		// Sign-out successful.
-		// $('#m_sign_out').modal('hide');
 		window.location.replace('/..');
 	}).catch((error) => {
 		// An error happened.
 	});
 });
-$('#btn_new_game').click(function(){
+
+// Create a new game onclick.
+$('.btn_new_game').click(function(){
 	newGame(userinfo);
 });
-$('#btn_update_game').click(function(){
-	console.log(userinfo);
-	updateGame();
-});
 
-
-function writeData (userinfo){
-	set(ref(database, 'users/' + userinfo.uid), {
-
-	});
-}
-function updateGame(){
-	console.log(game_id);
-	let this_move = move + "A";
-	let updates = {};
-	updates['/games/' + game_id + '/moves'] = this_move;
-	update(ref(database), updates);
-}
+// Generate random string for game ID.
 function makeGameId(){
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -137,26 +118,21 @@ function makeGameId(){
 	}
 	return result;
 }
+
+// Create a new game action.
 function newGame(userinfo){
 	game_id = makeGameId();
 	let game_url = window.location.origin + '/play.html?game=' + game_id;
-	console.log(game_url);
 	set(ref(database, 'games/' + game_id), {
-		p1 : userinfo.uid,
+		p1 : userinfo.email,
 		p2 : "",
-		move : "",
+		now : 0,
+		next : 9,
+		last : "",
+		sets : ",,,,,,,,",
+		moves : ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,",
 	}).then(()=>{
 		window.location.replace(game_url);
 	});
 }
-function checkUser(){
-	console.log("11111111111" + userinfo);
-}
 
-onValue(ref(database, '/games/' + game_id + '/moves'), (snapshot) => {
-	console.log("move:" + snapshot.val());
-	move = snapshot.val();
-});
-onValue(ref(database, '/games/' + game_id + '/p2'), (snapshot) => {
-	console.log("p2:" + snapshot.val() + "has accept your challenge!");
-});
