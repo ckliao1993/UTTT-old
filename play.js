@@ -223,11 +223,11 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 			draw(game.moves[i], i);
 		}
 	}
-	for(let k = 0; k<80; k += 9){
-		let win = checkGame(game.moves.slice(k, k+9));
-		if(win){game.sets[board] = win;}
-		board ++;
-	}
+	// for(let k = 0; k<80; k += 9){
+	// 	let win = checkGame(game.moves.slice(k, k+9));
+	// 	if(win){game.sets[board] = win;}
+	// 	board ++;
+	// }
 	let winner = checkGame(game.sets);
 	if(winner){
 		$('#msg_color').text(winner ? "BlUE WIN!": "RED WIN!");
