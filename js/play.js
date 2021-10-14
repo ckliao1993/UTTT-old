@@ -63,13 +63,20 @@ onAuthStateChanged(auth, (user) => {
 // Cell action when click.
 $('div.cell.small').click((event)=>{
 	console.log($(event.target));
-	console.log($(event.target).html() == null);
-	if($(event.target).parent().parent().hasClass('allow') && $(event.target).html() == null){
+	if(game.now !== player){
+		toast("It's not your turn, please wait for your opponent.");
+		return;
+	}
+	if($(event.target).is('i')){
+		toast("What are you trying to do???");
+		return;
+	}
+	if($(event.target).parent().parent().hasClass('allow')){
 		makeAmove(event);
 		clearInterval(shine);
-		$('div.allow').toggleClass('bg', false).toggleClass('allow', false);
+		$('div.allow').toggleClass('bg bg-g allow', false);
 	} else {
-		toast("It's not your turn, please wait for other opponent.");
+		toast("Please place where it's shinning.");
 	}
 });
 
@@ -93,8 +100,6 @@ function checkUserStatus(game){
 			$('#invite_link').val(url);
 			$('#m_create_link').modal('show');
 			toast("Your opponent haven't accept your invite yet.");
-		} else {
-			toast("Your opponent have accept your challenge!");
 		}
 		light(player);
 	} else if (game.p2 == userinfo.email){
