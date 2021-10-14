@@ -200,7 +200,7 @@ function toast(msg){
 // Listen on database change
 onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	$('#m_loading').modal('hide');
-	$('#msg_user').text(snapshot.val().p1.split('@')[0] + " 想要挑戰你");
+	$('#msg_user').html("<span class='oo'>" + snapshot.val().p1.split('@')[0] + "</span> 想要挑戰你");
 
 	// Trying draw all pieces every time.
 	let board = 0;

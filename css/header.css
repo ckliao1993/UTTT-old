@@ -76,7 +76,7 @@ main {
 .bg-g {background-color: var(--color-shine-1);}
 .bg-0 {background-color: var(--color-win-oo);}
 .bg-1 {background-color: var(--color-win-xx);}
-.bi-circle {color: var(--color-oo);}
+.bi-circle, .oo {color: var(--color-oo);}
 .bi-x-lg {color: var(--color-xx);}
 .header {background-color: var(--color-header);}
 .ad {font-family: AD;}
