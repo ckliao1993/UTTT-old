@@ -25,8 +25,10 @@ const auth = getAuth();
 const database = getDatabase(app);
 
 // Set common variable.
-const piece_0 = '<i class="bi bi-circle"></i>'; // oo
-const piece_1 = '<i class="bi bi-x-lg"></i>'; // xx
+// const piece_0 = '<i class="bi bi-circle align-middle"></i>'; // oo
+// const piece_1 = '<i class="bi bi-x-lg align-middle"></i>'; // xx
+const piece_0 = '<svg width="80%" height="80%" fill="currentColor" class="bi bi-circle mx-auto my-auto" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/></svg>'; // oo
+const piece_1 = '<svg width="90%" height="90%" fill="currentColor" class="bi bi-x-lg mx-auto my-auto" viewBox="0 0 16 16"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/></svg>'; // xx
 let toast_no = 0;
 let game_id = new URL(location.href).searchParams.get("game");
 let url = window.location.href;
@@ -62,8 +64,9 @@ onAuthStateChanged(auth, (user) => {
 
 // Cell action when click.
 $('div.cell.small').click((event)=>{
+	let other = player ? game.p1.split('@')[0] : game.p2.split('@')[0] ;
 	if(game.now !== player){
-		toast("現在是對手的回合");
+		toast("現在是對手" + other + "的回合");
 		return;
 	}
 	if($(event.target).is('i')){
@@ -135,18 +138,18 @@ function light(player){
 		if(game.last<81){toast(other + " 下了一顆棋子");}
 	} else {
 		// It's not your turn, wait for it.
-		toast("現在是 "+ other +" 的回合，請耐心等候");
+		// toast("現在是 "+ other +" 的回合，請耐心等候");
 	}
 }
 
 // User make a move action, with a loading gif that disappear too soon.
-function makeAmove(event){
+async function makeAmove(event){
 	$(event.target).html('<img src="../img/loading.gif" style="width:100%; vertical-align:top;">');
 	let updates = {};
 	let last = event.target.dataset.cellno;
 	let board = last / 9;
 	game.moves[last] = player;
-	let win = checkGame(game.moves.slice(board*9, board*9+9));
+	let win = await checkGame(game.moves.slice(board*9, board*9+9));
 	if(win){game.sets[board] = win;}
 	updates['/games/' + game_id + '/moves'] = game.moves.join(',');
 	updates['/games/' + game_id + '/sets'] = game.sets.join(',');
@@ -207,13 +210,7 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	game = snapshot.val();
 	game.sets = game.sets.split(',');
 	game.moves = game.moves.split(',');
-	for(let j in game.sets){
-		if(game.sets[j]){
-			game.sets[j] = parseInt(game.sets[j]);
-			$("[data-boardno="+ j +"]").toggleClass("bg-" + game.sets[j], true)
-			$("[data-boardno="+ j +"]").removeAttr("data-boardno");
-		}
-	}
+
 	for(let i in game.moves){
 		if(game.moves[i]){
 			game.moves[i] = parseInt(game.moves[i]);
@@ -234,7 +231,19 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 			$('#m_win').modal('show');
 		});		
 	} else {
+		for(let k = 0; k<80; k += 9){
+			let win = checkGame(game.moves.slice(k, k+9));
+			if(win){game.sets[board] = win;}
+			board ++;
+		}
 		checkUserStatus(game);
+	}
+	for(let j in game.sets){
+		if(game.sets[j]){
+			game.sets[j] = parseInt(game.sets[j]);
+			$("[data-boardno="+ j +"]").toggleClass("bg-" + game.sets[j], true)
+			$("[data-boardno="+ j +"]").removeAttr("data-boardno");
+		}
 	}
 	console.log(game);
 	// }

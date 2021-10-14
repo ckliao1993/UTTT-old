@@ -65,9 +65,10 @@ main {
 .small {border-width: 1px !important;}
 
 .cell.small {
-	font-size: 2.2em;
+	font-size: 2em;
 	text-align: center;
 }
+.form-check-input {cursor: pointer;}
 .allow {cursor: pointer;}
 .tt {transform: translate(-100%, 0);}
 
