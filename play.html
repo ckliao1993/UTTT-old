@@ -35,7 +35,8 @@
 						<a class="dropdown-item" href="/../games.html">View my games</a>
 						<a class="dropdown-item btn_new_game" href="#">New game</a>
 						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_how">How to play?</a>
-						<a class="dropdown-item" href="#" id="btn_dark">Dark mode</a>
+						<!-- <a class="dropdown-item btn_dol" href="#" id="btn_dark" data-theme="dark">Dark mode</a>
+						<a class="dropdown-item btn_dol" href="#" id="btn_light" data-theme="light">Light mode</a> -->
 						<div class="flex-shrink-0 dropdown dropstart btn-group" id="btn_drop">
 							<a class="dropdown-item dropdown-toggle " data-bs-toggle="dropdown" href="#" id="dropdownUser1" aria-expanded="false">Language</a>
 							<ul class="dropdown-menu text-small shadow tt" aria-labelledby="dropdownUser1" id="d_two">
@@ -46,6 +47,10 @@
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a>
 						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a>
+						<div class="form-check form-switch ms-3">
+							<input id="theme" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+							<label id="icon_theme" class="form-check-label" for="flexSwitchCheckChecked"></label>
+						</div>
 					</ul>
 				</div>
 			</div>
@@ -240,7 +245,9 @@
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
 					<h2 class="fs-5 fw-bold mb-3">Copy the link below and send to a friend</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<div class="d-flex justify-content-end align-items-center gap-3">
@@ -258,7 +265,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 class="fw-bold mb-0">Log in</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<form id="f_log_in">
@@ -284,7 +293,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 class="fw-bold mb-0">Sign out</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
@@ -302,7 +313,9 @@
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
 					<h2 class="fw-bold mb-0" id="msg_user">User??? have challenge you!</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<form id="f_register">
@@ -334,7 +347,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 id="msg_color" class="fw-bold mb-0">Battle have been settle</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<h2 id="msg_con" class="fs-5 fw-bold mb-3">Nothing to see here.</h2>
@@ -351,7 +366,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 class="fw-bold mb-0">How to play?</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0 d-flex flex-column">
 					<span>

@@ -62,17 +62,15 @@ onAuthStateChanged(auth, (user) => {
 
 // Cell action when click.
 $('div.cell.small').click((event)=>{
-	if($(event.target).parent().parent().hasClass('allow')){
+	console.log($(event.target));
+	console.log($(event.target).html() == null);
+	if($(event.target).parent().parent().hasClass('allow') && $(event.target).html() == null){
 		makeAmove(event);
 		clearInterval(shine);
 		$('div.allow').toggleClass('bg', false).toggleClass('allow', false);
 	} else {
 		toast("It's not your turn, please wait for other opponent.");
 	}
-});
-
-$('#btn_dark').click(()=>{
-	toast("There's nothing here.");
 });
 
 // Copy icon click action
@@ -166,9 +164,7 @@ function joinGame(userinfo){
 
 // Draw pieces depends on user character.
 function draw(who, where){
-	console.log("who", who);
-	who = 'piece_' + who;
-	$('div[data-cellno="' + where + '"]').html(who);
+	$('div[data-cellno="' + where + '"]').html(who ? piece_1 : piece_0);
 }
 
 // Check if small or big board are finish.

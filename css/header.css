@@ -12,7 +12,11 @@
 	--color-header: #779878;
 	--color-primary: #5e8996;
 	--color-primary-h: #7ea9b6;
-	--color-secondary: #6c757d;
+	--color-secondary: #999da1;
+	--color-shine: #ffff7ece;
+	--color-shine-1: #779878;
+	--color-oo: red;
+	--color-xx: blue;
 	--opacity-s: 1;
 	--opacity-m: 1;
 	--opacity-l: 1;
@@ -59,26 +63,25 @@ main {
 .small {border-width: 1px !important;}
 
 .cell.small {
-	font-size: 2.5em;
+	font-size: 2.2em;
 	text-align: center;
 }
 .allow {cursor: pointer;}
 .tt {transform: translate(-100%, 0);}
 
 
-.bg {background-color: #ffff5ece;}
-.bg-g {background-color: #779878;}
+.bg {background-color: var(--color-shine);}
+.bg-g {background-color: var(--color-shine-1);}
 .bg-0 {background-color: #ee7373a2;}
 .bg-1 {background-color: #7dabff9d;}
-.bi-circle {color: red;}
-.bi-x-lg {color: blue;}
+.bi-circle {color: var(--color-oo);}
+.bi-x-lg {color: var(--color-xx);}
 .header {background-color: var(--color-header);}
-.title {color: var(--color-primary);}
 .ad {font-family: AD;}
-.top {border-bottom: 3px solid black;}
-.bottom {border-top: 3px solid black;}
-.left {border-right: 3px solid black;}
-.right {border-left: 3px solid black;}
+.top {border-bottom: 3px solid var(--color-text);}
+.bottom {border-top: 3px solid var(--color-text);}
+.left {border-right: 3px solid var(--color-text);}
+.right {border-left: 3px solid var(--color-text);}
 .cell.small:hover {background-color: rgb(189, 189, 189);}
 .btn-primary {
 	color: var(--color-text-r);
@@ -102,30 +105,36 @@ main {
 }
 .form-check-input:checked {background-color: var(--color-primary);}
 .form-check-input:focus {border-color: var(--color-primary);}
-
-.btn-x {
-	color: var(--color-text);
+.link-dark {color: var(--color-text);}
+.toast {
+	background-color: rgba(255, 255, 255, 0.95);
+	color: #000;
 }
-
+.btn-x {color: var(--color-text);}
+.bi-clipboard, .bi-check, .title {color: var(--color-primary);}
 .form-control {
 	background-color: var(--color-bg-2);
 	color: var(--color-text);
 }
+.form-control[readonly] {background-color: var(--color-bg-2);}
 .form-control:focus {
 	background-color: var(--color-bg-2);
 	color: var(--color-text);
 } 
 
-
 .dark {
-	--color-bg: #121212;
-	--color-bg-1: #333333;
+	--color-bg: #333333;
+	--color-bg-1: #555555;
 	--color-bg-2: #707070;
 	--color-text: #fff;
 	--color-text-r: #000;
 	--color-header: #070707;
 	--color-primary: #43a7c5;
 	--color-primary-h: #4ad2fc;
+	--color-shine: #8cbaff;
+	--color-shine-1: #fcfcadce;
+	--color-oo: #ff5757;
+	--color-xx: #677967;
 	--opacity-s: 0.38;
 	--opacity-m: 0.6;
 	--opacity-l: 0.87;

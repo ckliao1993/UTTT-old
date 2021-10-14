@@ -77,12 +77,11 @@ $("#f_register").submit(function(e) {
 			case 'auth/weak-password':
 				alert('Password should be at least 6 characters.');
 				break;
-			case 'auth/credential-already-in-use':
+			case 'auth/email-already-in-use':
 				alert('Username already taken, please use another one.');
 				break;
 			default:
-				console.log(error.code);
-				alert(error.message);
+			console.log(error.code, error.message);
 		}
 	});
 });
@@ -102,6 +101,7 @@ $("#f_log_in").submit(function(e) {
 		$('#m_log_in').modal('hide');
 	})
 	.catch((error) => {
+		console.log(error.code, error.message);
 		alert('Log in error, please try again.');
 	});
 });
