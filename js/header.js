@@ -29,7 +29,14 @@ const database = getDatabase(app);
 // Set common variable.
 const url = window.location.origin;
 let game_id = new URL(location.href).searchParams.get("game");
+let theme = localStorage.getItem('theme');
+let dark = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark':'light';
 let userinfo;
+if(theme == null){
+	changeTheme(dark);
+} else {
+	changeTheme(theme);
+}
 console.log(game_id);
 
 // Auth state
@@ -66,8 +73,17 @@ $("#f_register").submit(function(e) {
 		}
 	})
 	.catch((error) => {
-		console.log(error.message);
-		alert('Register error, please try again');
+		switch (error.code){
+			case 'auth/weak-password':
+				alert('Password should be at least 6 characters.');
+				break;
+			case 'auth/credential-already-in-use':
+				alert('Username already taken, please use another one.');
+				break;
+			default:
+				console.log(error.code);
+				alert(error.message);
+		}
 	});
 });
 
@@ -109,6 +125,35 @@ $('.btn_new_game').click(()=>{
 	}
 });
 
+// Theme btn onclick.
+$('#theme').change(()=>{
+	if($('#theme').prop('checked')){
+		changeTheme('dark');
+		localStorage.setItem("theme", 'dark');
+	} else {
+		changeTheme('light');
+		localStorage.setItem("theme", 'light');
+	}
+});
+
+// 2nd layer dropdown layer hover action.
+$('#btn_drop, #d_two').mouseover(()=>{
+	$('#d_two').show();
+});
+$('#btn_drop, #d_two').mouseout(()=>{
+	$('#d_two').hide();
+});
+
+// Change language
+$('.btn_lang').click((e)=>{
+	let lang = e.target.dataset.lang;
+	console.log(lang);
+	// console.log(this);
+	// console.log(this.$i18n);
+	// localStorage.setItem(ox_Lang, lang);
+	// this.$i18n.locale = lang;
+});
+
 // Generate random string for game ID.
 function makeGameId(){
     let result           = '';
@@ -137,3 +182,14 @@ function newGame(userinfo){
 	});
 }
 
+function changeTheme (state){
+	if(state == 'dark'){
+		$('#theme').prop('checked', true);
+		$('body').toggleClass('dark', true);
+		$('#icon_theme').html('<i class="bi bi-moon-fill text-light"></i>');
+	} else {
+		$('#theme').prop('checked', false);
+		$('body').toggleClass('dark', false);
+		$('#icon_theme').html('<i class="bi bi-sun-fill"></i>');
+	}
+}

@@ -17,28 +17,35 @@
 	<!-- Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- Custom style sheet -->
-	<link rel="stylesheet" href="./header.css">
+	<link rel="stylesheet" href="./css/header.css">
 	<!-- Custom Modules -->
-	<script type="module" src="./play.js"></script>
-	<script type="module" src="./header.js"></script>
+	<script type="module" src="./js/play.js"></script>
+	<script type="module" src="./js/header.js"></script>
 </head>
 <body class="bg-green">
 	<header class="py-3 mb-3 border-bottom fixed-top header">
 		<div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
 			<a class="navbar-brand fw-bold fs-1 text-light lh-1 ad px-3" href="/../games.html">O O X X</a>
 			<div class="d-flex flex-row-reverse">
-				<div class="flex-shrink-0 dropdown">
+				<div id="d_big" class="flex-shrink-0 dropdown btn-group">
 					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-light fs-2" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="bi bi-list"></i>
 					</a>
-					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="/../games.html">View my games</a></li>
-						<li><a class="dropdown-item btn_new_game" href="#">New game</a></li>
-						<li><a class="dropdown-item" href="#">How to play?</a></li>
-						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a></li>					</ul>
+					<ul id="d_one" class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2">
+						<a class="dropdown-item" href="/../games.html">View my games</a>
+						<a class="dropdown-item btn_new_game" href="#">New game</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_how">How to play?</a>
+						<a class="dropdown-item" href="#" id="btn_dark">Dark mode</a>
+						<div class="flex-shrink-0 dropdown dropstart btn-group" id="btn_drop">
+							<a class="dropdown-item dropdown-toggle " data-bs-toggle="dropdown" href="#" id="dropdownUser1" aria-expanded="false">Language</a>
+							<ul class="dropdown-menu text-small shadow tt" aria-labelledby="dropdownUser1" id="d_two">
+								<a class="dropdown-item btn_lang" href="#" data-lang="en">English</a>
+								<a class="dropdown-item btn_lang" href="#" data-lang="zh-tw">中文</a>
+							</ul>
+						</div>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a>
 					</ul>
 				</div>
 			</div>
@@ -339,6 +346,26 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal" tabindex="-1" id="m_how">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">How to play?</h2>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body p-5 pt-0 d-flex flex-column">
+					<span>
+						Win three games of Tic Tac Toe in a row.You may only play in the big field thatcorresponds to the last small field youropponent played. When your are sent to afield that is already decided, you canchoose freely.
+					</span>
+					<span class="mt-5">You can find more details 
+						<a href="https://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/" target="_blank"  data-bs-toggle="tooltip" title="Ultimate Tic-Tac-Toe
+						">here</a>
+					</span>		
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Toast area. -->
 	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
 		<div id="t_container" class="toast-container">

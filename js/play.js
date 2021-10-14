@@ -139,7 +139,7 @@ function light(player){
 
 // User make a move action, with a loading gif that disappear too soon.
 function makeAmove(event){
-	$(event.target).html('<img src="loading.gif" style="width:100%; vertical-align:top;">');
+	$(event.target).html('<img src="../img/loading.gif" style="width:100%; vertical-align:top;">');
 	let updates = {};
 	let last = event.target.dataset.cellno;
 	let board = last / 9;

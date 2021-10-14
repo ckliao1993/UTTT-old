@@ -1,0 +1,135 @@
+@font-face {
+	font-family: AD;
+	src: url(../img/ArchitectsDaughter-Regular.ttf);
+}
+
+:root {
+	--color-bg: #e1e2d1;
+	--color-bg-1: #fff;
+	--color-bg-2: #fff;
+	--color-text: #000;
+	--color-text-r: #fff;
+	--color-header: #779878;
+	--color-primary: #5e8996;
+	--color-primary-h: #7ea9b6;
+	--color-secondary: #6c757d;
+	--opacity-s: 1;
+	--opacity-m: 1;
+	--opacity-l: 1;
+}
+
+body {
+	padding-top: 4.5rem;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	opacity: var(--opacity-l);
+}
+
+html, body {
+	margin: 0;
+	height: 100%;
+}
+
+.row{height: 33.33%;}
+
+.container {
+	width: 90vw !important;
+	height: 90vw;
+}
+main {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+@media (min-width: 576px) {
+	.container {
+		height: 80vh;
+		width: 80vh !important;
+	}
+}
+
+.board.small {
+	height: 80%;
+	width: 80%;
+	margin: 10% auto;
+	border-radius: 1rem;
+}
+
+.small {border-width: 1px !important;}
+
+.cell.small {
+	font-size: 2.5em;
+	text-align: center;
+}
+.allow {cursor: pointer;}
+.tt {transform: translate(-100%, 0);}
+
+
+.bg {background-color: #ffff5ece;}
+.bg-g {background-color: #779878;}
+.bg-0 {background-color: #ee7373a2;}
+.bg-1 {background-color: #7dabff9d;}
+.bi-circle {color: red;}
+.bi-x-lg {color: blue;}
+.header {background-color: var(--color-header);}
+.title {color: var(--color-primary);}
+.ad {font-family: AD;}
+.top {border-bottom: 3px solid black;}
+.bottom {border-top: 3px solid black;}
+.left {border-right: 3px solid black;}
+.right {border-left: 3px solid black;}
+.cell.small:hover {background-color: rgb(189, 189, 189);}
+.btn-primary {
+	color: var(--color-text-r);
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+.btn-primary:hover {
+	color: var(--color-text-r);
+	background-color: var(--color-primary-h);
+	border-color: var(--color-primary-h);
+}
+.btn-secondary {
+	background-color: var(--color-secondary);
+	border-color: var(--color-secondary);
+}
+.modal-content {background-color: var(--color-bg-1);}
+.dropdown-menu {background-color:  var(--color-bg-2);}
+.dropdown-item {
+	color: var(--color-text);
+	opacity: var(--opacity-l)
+}
+.form-check-input:checked {background-color: var(--color-primary);}
+.form-check-input:focus {border-color: var(--color-primary);}
+
+.btn-x {
+	color: var(--color-text);
+}
+
+.form-control {
+	background-color: var(--color-bg-2);
+	color: var(--color-text);
+}
+.form-control:focus {
+	background-color: var(--color-bg-2);
+	color: var(--color-text);
+} 
+
+
+.dark {
+	--color-bg: #121212;
+	--color-bg-1: #333333;
+	--color-bg-2: #707070;
+	--color-text: #fff;
+	--color-text-r: #000;
+	--color-header: #070707;
+	--color-primary: #43a7c5;
+	--color-primary-h: #4ad2fc;
+	--opacity-s: 0.38;
+	--opacity-m: 0.6;
+	--opacity-l: 0.87;
+}
+
+
+/* @media (prefers-color-scheme: dark) {} */

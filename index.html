@@ -2,9 +2,13 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="color-scheme" content="dark light">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Vue.js -->
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/vuex@next"></script>
+	<script src="https://unpkg.com/vue-i18n@next"></script>
 	<!-- VUE.js Change to this for production -->
 	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
 	<!-- Bootstrap CSS -->
@@ -16,50 +20,69 @@
 	<!-- Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<!-- Custom style sheet -->
-	<link rel="stylesheet" href="./header.css">
-	<!-- Firebase -->
-	<script type="module" src="./header.js"></script>
+	<link rel="stylesheet" href="./css/header.css">
+	<!-- Custom Modules -->
+	<script type="module" src="./js/header.js"></script>
+	<script type="module" src="./js/vue.js"></script>
 
 </head>
-<body class="bg-green">
+<body class="">
 	<header class="py-3 mb-3 border-bottom fixed-top header">
 		<div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
 			<a class="navbar-brand fw-bold fs-1 text-light lh-1 ad px-3" href="/../games.html">O O X X</a>
 			<div class="d-flex flex-row-reverse">
-				<div class="flex-shrink-0 dropdown">
+				<div id="d_big" class="flex-shrink-0 dropdown btn-group">
 					<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle text-light fs-2" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="bi bi-list"></i>
 					</a>
-					<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-						<li><a class="dropdown-item" href="/../games.html">View my games</a></li>
-						<li><a class="dropdown-item btn_new_game" href="#">New game</a></li>
-						<li><a class="dropdown-item" href="#">How to play?</a></li>
-						<li><a class="dropdown-item" href="#" id="btn_dark">Dark mode</a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a></li>
-						<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a></li>					</ul>
+					<ul id="d_one" class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2">
+						<a class="dropdown-item" href="/../games.html">View my games</a>
+						<a class="dropdown-item btn_new_game" href="#">New game</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_how">How to play?</a>
+						<!-- <a class="dropdown-item btn_dol" href="#" id="btn_dark" data-theme="dark">Dark mode</a>
+						<a class="dropdown-item btn_dol" href="#" id="btn_light" data-theme="light">Light mode</a> -->
+						<div class="flex-shrink-0 dropdown dropstart btn-group" id="btn_drop">
+							<a class="dropdown-item dropdown-toggle " data-bs-toggle="dropdown" href="#" id="dropdownUser1" aria-expanded="false">Language</a>
+							<ul class="dropdown-menu text-small shadow tt" aria-labelledby="dropdownUser1" id="d_two">
+								<a class="dropdown-item btn_lang" href="#" data-lang="en">English</a>
+								<a class="dropdown-item btn_lang" href="#" data-lang="zh-tw">中文</a>
+							</ul>
+						</div>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a>
+						<div class="form-check form-switch ms-3">
+							<input id="theme" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+							<label id="icon_theme" class="form-check-label" for="flexSwitchCheckChecked"></label>
+						</div>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</header>
-	<main>
+	<main class="d-flex flex-column justify-content-between">
 		<div class="container d-flex flex-column justify-content-center">
 			<h1 class="text-center title fw-bold ad">Ultimate Tic Tac Toe</h1>
 			<hr class="my-4">
-			<h3 class="text-center">- Instructions -</h3>
-			<span>Win three games of Tic Tac Toe in a row.
-				You may only play in the big field that
-				corresponds to the last small field your
-				opponent played. When your are sent to a
-				field that is already decided, you can
-				choose freely.</span>
+			<h3 class="text-center">- Instruction -</h3>
+			<span>Win three games of Tic Tac Toe in a row.You may only play in the big field thatcorresponds to the last small field youropponent played. When your are sent to afield that is already decided, you canchoose freely.</span>
+			<span>You can find more details 
+				<a href="https://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/" target="_blank"  data-bs-toggle="tooltip" title="Ultimate Tic-Tac-Toe
+				">here</a>
+			</span>
 			<hr class="my-4">
 			<div class="d-grid">
 				<button class="btn btn-primary btn_new_game">Start Game</button>
 			</div>
 		</div>
+		<div>
+			<!-- <a href="#" data-bs-toggle="modal" data-bs-target="#m_about">About</a> -->
+			<a href="#" id="btn_test" data-bs-toggle="dropdown" id="dropdownUser2">About</a>
+
+		</div>
 	</main>
+	<footer>
+	</footer>
 
 	<!-- Modal area -->
 	<div class="modal" tabindex="-1" id="m_start">
@@ -68,7 +91,9 @@
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
 					<h2 class="fw-bold mb-0">Create an account</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<form id="f_register">
@@ -85,7 +110,7 @@
 					</form>
 					<hr class="my-4">
 					<h2 class="fs-5 fw-bold mb-3">Already have a account?</h2>
-					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
+					<button class="w-100 py-2 mb-2 btn btn-secondary rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
 			</div>
 			</div>
 		</div>
@@ -95,7 +120,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 class="fw-bold mb-0">Log in</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<form id="f_log_in">
@@ -107,7 +134,7 @@
 							<input type="password" class="form-control rounded-4" id="login_pwd" placeholder="Password">
 							<label for="login_pwd">Password</label>
 						</div>
-						<button id="btn_log_in" class="w-100 py-2 mb-2 btn btn-lg btn-outline-dark rounded-4" type="submit">Log in</button>
+						<button id="btn_log_in" class="w-100 py-2 mb-2 btn btn-lg btn-secondary rounded-4" type="submit">Log in</button>
 					</form>
 					<hr class="my-4">
 					<h2 class="fs-5 fw-bold mb-3">Don't have an account? Join now!</h2>
@@ -121,7 +148,9 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<h2 class="fw-bold mb-0">Sign out</h2>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
@@ -133,6 +162,43 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="modal" tabindex="-1" id="m_about">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">About us</h2>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
+				</div>
+				<div class="modal-body p-5 pt-0 d-flex justify-content-center">
+					<a href="https://github.com/ckliao1993/UTTT" class="link-dark" target="_blank" data-bs-toggle="tooltip" title="Git Hub page">
+						<i class="bi bi-github fs-1"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" id="m_how">
+		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+			<div class="modal-content rounded-5 shadow">
+				<div class="modal-header p-5 pb-4 border-bottom-0">
+					<h2 class="fw-bold mb-0">How to play?</h2>
+					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-x-lg btn-x"></i>
+					</button>
+				</div>
+				<div class="modal-body p-5 pt-0 d-flex flex-column">
+					<span>
+						Win three games of Tic Tac Toe in a row.You may only play in the big field thatcorresponds to the last small field youropponent played. When your are sent to afield that is already decided, you canchoose freely.
+					</span>
+					<span class="mt-5">You can find more details 
+						<a href="https://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/" target="_blank"  data-bs-toggle="tooltip" title="Ultimate Tic-Tac-Toe
+						">here</a>
+					</span>		
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
