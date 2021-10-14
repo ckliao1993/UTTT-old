@@ -62,13 +62,12 @@ onAuthStateChanged(auth, (user) => {
 
 // Cell action when click.
 $('div.cell.small').click((event)=>{
-	console.log($(event.target));
 	if(game.now !== player){
-		toast("It's not your turn, please wait for your opponent.");
+		toast("現在是對手的回合");
 		return;
 	}
 	if($(event.target).is('i')){
-		toast("What are you trying to do???");
+		toast("想幹嘛?");
 		return;
 	}
 	if($(event.target).parent().parent().hasClass('allow')){
@@ -76,7 +75,7 @@ $('div.cell.small').click((event)=>{
 		clearInterval(shine);
 		$('div.allow').toggleClass('bg bg-g allow', false);
 	} else {
-		toast("Please place where it's shinning.");
+		toast("請將棋子放入閃爍的大棋盤格中");
 	}
 });
 
@@ -99,7 +98,7 @@ function checkUserStatus(game){
 		if(game.p2 == ""){
 			$('#invite_link').val(url);
 			$('#m_create_link').modal('show');
-			toast("Your opponent haven't accept your invite yet.");
+			toast("你的對手尚未接受邀請");
 		}
 		light(player);
 	} else if (game.p2 == userinfo.email){
@@ -108,7 +107,7 @@ function checkUserStatus(game){
 	} else if (game.p2 == ""){
 		joinGame(userinfo);
 	} else {
-		alert('Sorry, somebody is already in this battle.');
+		alert('抱歉，有人搶先一步接受了對戰邀請');
 	}
 }
 
@@ -133,10 +132,10 @@ function light(player){
 			}, 1000);
 			$("[data-boardno="+ game.next +"]").toggleClass('allow', true);
 		}
-		if(game.last<81){toast(other + " just made a move.");}
+		if(game.last<81){toast(other + " 下了一顆棋子");}
 	} else {
 		// It's not your turn, wait for it.
-		toast("It's "+ other +"'s turn, please wait.");
+		toast("現在是 "+ other +" 的回合，請耐心等候");
 	}
 }
 
@@ -164,7 +163,7 @@ function joinGame(userinfo){
 	update(ref(database), updates).then(()=>{
 		game.p2 = userinfo.email;
 	});
-	toast('Welcome to OOXX');
+	toast('歡迎來到 OOXX');
 }
 
 // Draw pieces depends on user character.
@@ -201,7 +200,7 @@ function toast(msg){
 // Listen on database change
 onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	$('#m_loading').modal('hide');
-	$('#msg_user').text(snapshot.val().p1.split('@')[0] + " has challenge you!!");
+	$('#msg_user').text(snapshot.val().p1.split('@')[0] + " 想要挑戰你");
 
 	// Trying draw all pieces every time.
 	let board = 0;
@@ -228,8 +227,8 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	// }
 	let winner = checkGame(game.sets);
 	if(winner){
-		$('#msg_color').text(winner ? "BlUE WIN!": "RED WIN!");
-		$('#msg_con').text(winner ? game.p2.split('@')[0]+" WIN!!!" : game.p1.split('@')[0]+" WIN!!!");
+		$('#msg_color').text(winner ? "藍方獲勝!!": "紅方獲勝!!");
+		$('#msg_con').text(winner ? game.p2.split('@')[0]+" 贏了!!!" : game.p1.split('@')[0]+" 贏了!!!");
 		$('#m_win').modal('show');
 		$('#game').click(()=>{
 			$('#m_win').modal('show');

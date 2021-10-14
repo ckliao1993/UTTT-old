@@ -32,21 +32,21 @@
 						<i class="bi bi-list"></i>
 					</a>
 					<ul id="d_one" class="dropdown-menu text-small shadow dropdown-menu-end" aria-labelledby="dropdownUser2">
-						<a class="dropdown-item" href="/../games.html">View my games</a>
-						<a class="dropdown-item btn_new_game" href="#">New game</a>
-						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_how">How to play?</a>
+						<a class="dropdown-item" href="/../games.html">查看我的遊戲</a>
+						<a class="dropdown-item btn_new_game" href="#">新遊戲</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_how">遊戲說明</a>
 						<!-- <a class="dropdown-item btn_dol" href="#" id="btn_dark" data-theme="dark">Dark mode</a>
-						<a class="dropdown-item btn_dol" href="#" id="btn_light" data-theme="light">Light mode</a> -->
+						<a class="dropdown-item btn_dol" href="#" id="btn_light" data-theme="light">Light mode</a>
 						<div class="flex-shrink-0 dropdown dropstart btn-group" id="btn_drop">
 							<a class="dropdown-item dropdown-toggle " data-bs-toggle="dropdown" href="#" id="dropdownUser1" aria-expanded="false">Language</a>
 							<ul class="dropdown-menu text-small shadow tt" aria-labelledby="dropdownUser1" id="d_two">
 								<a class="dropdown-item btn_lang" href="#" data-lang="en">English</a>
 								<a class="dropdown-item btn_lang" href="#" data-lang="zh-tw">中文</a>
 							</ul>
-						</div>
+						</div> -->
 						<hr class="dropdown-divider">
-						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">Log in</a>
-						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">Sign out</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_log_in" id="btn_to_login">登入</a>
+						<a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#m_sign_out" id="btn_to_signout">登出</a>
 						<div class="form-check form-switch ms-3">
 							<input id="theme" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
 							<label id="icon_theme" class="form-check-label" for="flexSwitchCheckChecked"></label>
@@ -244,7 +244,7 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
-					<h2 class="fs-5 fw-bold mb-3">Copy the link below and send to a friend</h2>
+					<h2 class="fs-5 fw-bold mb-3">複製以下網址並傳給他人來開始遊戲</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
@@ -264,7 +264,7 @@
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 class="fw-bold mb-0">Log in</h2>
+					<h2 class="fw-bold mb-0">登入</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
@@ -273,17 +273,17 @@
 					<form id="f_log_in">
 						<div class="form-floating mb-3">
 							<input type="text" class="form-control rounded-4" id="login_user" placeholder="Username">
-							<label for="login_user">Username</label>
+							<label for="login_user">使用者名稱</label>
 						</div>
 						<div class="form-floating mb-3">
 							<input type="password" class="form-control rounded-4" id="login_pwd" placeholder="Password">
-							<label for="login_pwd">Password</label>
+							<label for="login_pwd">密碼</label>
 						</div>
-						<button id="btn_log_in" class="w-100 py-2 mb-2 btn btn-lg btn-outline-dark rounded-4" type="submit">Log in</button>
+						<button id="btn_log_in" class="w-100 py-2 mb-2 btn btn-lg btn-outline-dark rounded-4" type="submit">登入</button>
 					</form>
 					<hr class="my-4">
-					<h2 class="fs-5 fw-bold mb-3">Don't have an account? Join now!</h2>
-					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-toggle="modal" data-bs-target="#m_start">Register</button>
+					<h2 class="fs-5 fw-bold mb-3">還沒有帳號嗎? 現在就註冊!</h2>
+					<button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" data-bs-toggle="modal" data-bs-target="#m_start">註冊</button>
 				</div>
 			</div>
 		</div>
@@ -292,16 +292,16 @@
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 class="fw-bold mb-0">Sign out</h2>
+					<h2 class="fw-bold mb-0">登出</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<h2 class="fs-5 fw-bold mb-3">Are you sure you want to sign out?</h2>
+					<h2 class="fs-5 fw-bold mb-3">確定要登出?</h2>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-						<button id="btn_sign_out" class="btn btn-secondary" type="button">Yes get me out</button>
-						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cancel</button>
+						<button id="btn_sign_out" class="btn btn-secondary" type="button">是的</button>
+						<button class="btn btn-primary" type="button" data-bs-dismiss="modal">不了</button>
 					</div>
 				</div>
 			</div>
@@ -312,27 +312,27 @@
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
 					<!-- <h5 class="modal-title">Modal title</h5> -->
-					<h2 class="fw-bold mb-0" id="msg_user">User??? have challenge you!</h2>
+					<h2 class="fw-bold mb-0" id="msg_user">有人挑戰你</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
 					<form id="f_register">
-						<small class="text-muted">You don't have a account, register to accept the challenge</small>
+						<small class="text-muted">您沒有帳號，建立帳號來加入遊戲</small>
 						<div class="form-floating mb-3 mt-3">
 							<input name="username" type="text" class="form-control rounded-4" id="register_user" placeholder="Username">
-							<label for="register_user">Username</label>
+							<label for="register_user">使用者名稱</label>
 						</div>
 						<div class="form-floating mb-3">
 							<input name="password" type="password" class="form-control rounded-4" id="register_pwd" placeholder="Password">
-							<label for="register_pwd">Password</label>
+							<label for="register_pwd">密碼</label>
 						</div>
-						<button id="btn_register" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Register  &  Play</button>
+						<button id="btn_register" class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">註冊 & 開始遊戲</button>
 					</form>
 					<hr class="my-4">
-					<h2 class="fs-5 fw-bold mb-3">Already have a account?</h2>
-					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">Log in</button>
+					<h2 class="fs-5 fw-bold mb-3">已有帳號?</h2>
+					<button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" data-bs-toggle="modal" data-bs-target="#m_log_in">登入</button>
 			</div>
 			</div>
 		</div>
@@ -346,16 +346,16 @@
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 id="msg_color" class="fw-bold mb-0">Battle have been settle</h2>
+					<h2 id="msg_color" class="fw-bold mb-0">勝負已經揭曉</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
 				</div>
 				<div class="modal-body p-5 pt-0">
-					<h2 id="msg_con" class="fs-5 fw-bold mb-3">Nothing to see here.</h2>
+					<h2 id="msg_con" class="fs-5 fw-bold mb-3">有人贏了</h2>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-						<button class="btn btn-primary btn_new_game" type="button">Start a new game.</button>
-						<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">OK</button>
+						<button class="btn btn-primary btn_new_game" type="button">開始新遊戲</button>
+						<button class="btn btn-secondary" type="button" data-bs-dismiss="modal">好吧</button>
 					</div>
 				</div>
 			</div>
@@ -365,18 +365,18 @@
 		<div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
 			<div class="modal-content rounded-5 shadow">
 				<div class="modal-header p-5 pb-4 border-bottom-0">
-					<h2 class="fw-bold mb-0">How to play?</h2>
+					<h2 class="fw-bold mb-0">遊戲說明</h2>
 					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
 						<i class="bi bi-x-lg btn-x"></i>
 					</button>
 				</div>
 				<div class="modal-body p-5 pt-0 d-flex flex-column">
 					<span>
-						Win three games of Tic Tac Toe in a row.You may only play in the big field thatcorresponds to the last small field youropponent played. When your are sent to afield that is already decided, you canchoose freely.
+						在大棋盤中連成直線來贏得遊戲，棋子只能被放入受限制的大棋盤格中，受限制的大棋盤格來自於您的對手在小棋盤中的上一步。當被送往已分出勝負的大棋盤格，就可以隨意選擇任何大棋盤格放置棋子。
 					</span>
-					<span class="mt-5">You can find more details 
+					<span class="mt-5">更多說明請看
 						<a href="https://mathwithbaddrawings.com/2013/06/16/ultimate-tic-tac-toe/" target="_blank"  data-bs-toggle="tooltip" title="Ultimate Tic-Tac-Toe
-						">here</a>
+						">這裡</a>
 					</span>		
 				</div>
 			</div>

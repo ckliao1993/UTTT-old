@@ -75,10 +75,10 @@ $("#f_register").submit(function(e) {
 	.catch((error) => {
 		switch (error.code){
 			case 'auth/weak-password':
-				alert('Password should be at least 6 characters.');
+				alert('密碼必須至少含有6個字元');
 				break;
 			case 'auth/email-already-in-use':
-				alert('Username already taken, please use another one.');
+				alert('使用者名稱已被使用');
 				break;
 			default:
 			console.log(error.code, error.message);
@@ -102,7 +102,7 @@ $("#f_log_in").submit(function(e) {
 	})
 	.catch((error) => {
 		console.log(error.code, error.message);
-		alert('Log in error, please try again.');
+		alert('登入錯誤，請再試一次。');
 	});
 });
 

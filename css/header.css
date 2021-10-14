@@ -137,12 +137,12 @@ main {
 	--color-shine-1: #fcfcadce;
 	--color-oo: #ff2f2f;
 	--color-xx: #5d975d;
-	--color-win-oo: #fdeaeaab;
-	--color-win-xx: #eafdeaa1;
+	--color-win-oo: #ff4f4f21; 
+	--color-win-xx: #55fd5521;
 	--opacity-s: 0.38;
 	--opacity-m: 0.6;
 	--opacity-l: 0.87;
 }
-
+/* #fdeaeaab,  #eafdeaa1*/
 
 /* @media (prefers-color-scheme: dark) {} */
