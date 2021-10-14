@@ -27,7 +27,7 @@ const auth = getAuth();
 const database = getDatabase(app);
 
 // Set common variable.
-const url = window.location.origin;
+const url = window.location.href;
 let game_id = new URL(location.href).searchParams.get("game");
 let theme = localStorage.getItem('theme');
 let dark = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark':'light';
@@ -77,11 +77,14 @@ $("#f_register").submit(function(e) {
 			case 'auth/weak-password':
 				alert('密碼必須至少含有6個字元');
 				break;
+			case 'auth/invalid-email':
+				alert('使用者名稱不可包含符號');
+				break;
 			case 'auth/email-already-in-use':
 				alert('使用者名稱已被使用');
 				break;
 			default:
-			console.log(error.code, error.message);
+				console.log(error.code, error.message);
 		}
 	});
 });
@@ -93,7 +96,7 @@ $("#f_log_in").submit(function(e) {
 		email : $('#login_user').val() + '@custom.com',
 		pwd : $('#login_pwd').val()
 	};
-
+	
 	signInWithEmailAndPassword(auth, info.email, info.pwd)
 	.then((userCredential) => {
 		// Signed in 
@@ -101,8 +104,20 @@ $("#f_log_in").submit(function(e) {
 		$('#m_log_in').modal('hide');
 	})
 	.catch((error) => {
-		console.log(error.code, error.message);
-		alert('登入錯誤，請再試一次。');
+		switch (error.code){
+			case 'auth/wrong-password':
+				alert('密碼錯誤');
+				break;
+			case 'auth/invalid-email':
+				alert('使用者名稱錯誤');
+				break;
+			case 'auth/user-not-found':
+				alert('找不到使用者');
+				break;
+			default:
+				alert('登入錯誤，請再試一次。');
+				console.log(error.code, error.message);
+		}
 	});
 });
 
@@ -168,7 +183,7 @@ function makeGameId(){
 // Create a new game action.
 function newGame(userinfo){
 	game_id = makeGameId();
-	let game_url = window.location.origin + '/play.html?game=' + game_id;
+	let game_url = url.substring(0, url.lastIndexOf('/')) + '/play.html?game=' + game_id;
 	set(ref(database, 'games/' + game_id), {
 		p1 : userinfo.email,
 		p2 : "",
