@@ -28,22 +28,23 @@ const database = getDatabase(app);
 
 // Set common variable.
 const url = window.location.href;
+let userinfo;
 let game_id = new URL(location.href).searchParams.get("game");
+console.log(game_id);
+// Set dark/light theme. Priorioty: User setting> Browser theme> manual switch
 let theme = localStorage.getItem('theme');
 let dark = window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark':'light';
-let userinfo;
 if(theme == null){
 	changeTheme(dark);
 } else {
 	changeTheme(theme);
 }
-console.log(game_id);
 
 // Auth state
 onAuthStateChanged(auth, (user) => {
 	if (user) {
 		userinfo = user;
-		// User is signed in, see docs for a list of available properties
+		// User is signed in
 		$('#btn_to_signout').show();
 		$('#btn_to_login').hide();
 		if(!$('#name').length){
@@ -124,7 +125,7 @@ $("#f_log_in").submit(function(e) {
 	});
 });
 
-// Sign out
+// Sign out onclick
 $('#btn_sign_out').click(function(){
 	signOut(auth).then(() => {
 		// Sign-out successful.
@@ -143,7 +144,7 @@ $('.btn_new_game').click(()=>{
 	}
 });
 
-// Theme btn onclick.
+// Theme switch change
 $('#theme').change(()=>{
 	if($('#theme').prop('checked')){
 		changeTheme('dark');
@@ -154,22 +155,12 @@ $('#theme').change(()=>{
 	}
 });
 
-// 2nd layer dropdown layer hover action.
+// 2nd layer dropdown hover action.
 $('#btn_drop, #d_two').mouseover(()=>{
 	$('#d_two').show();
 });
 $('#btn_drop, #d_two').mouseout(()=>{
 	$('#d_two').hide();
-});
-
-// Change language
-$('.btn_lang').click((e)=>{
-	let lang = e.target.dataset.lang;
-	console.log(lang);
-	// console.log(this);
-	// console.log(this.$i18n);
-	// localStorage.setItem(ox_Lang, lang);
-	// this.$i18n.locale = lang;
 });
 
 // Generate random string for game ID.
@@ -200,6 +191,7 @@ function newGame(userinfo){
 	});
 }
 
+// Change theme
 function changeTheme (state){
 	if(state == 'dark'){
 		$('#theme').prop('checked', true);

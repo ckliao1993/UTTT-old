@@ -1,8 +1,11 @@
+/****************** Custom Font ******************/
 @font-face {
 	font-family: AD;
 	src: url(../img/ArchitectsDaughter-Regular.ttf);
 }
+.ad {font-family: AD;}
 
+/****************** Root variable ******************/
 :root {
 	--color-bg: #e1e2d1;
 	--color-bg-1: #fff;
@@ -23,108 +26,7 @@
 	--opacity-m: 1;
 	--opacity-l: 1;
 }
-
-body {
-	padding-top: 4.5rem;
-	color: var(--color-text);
-	background-color: var(--color-bg);
-	opacity: var(--opacity-l);
-}
-
-html, body {
-	margin: 0;
-	height: 100%;
-}
-
-.row{height: 33.33%;}
-
-.container {
-	width: 90vw !important;
-	height: 90vw;
-}
-main {
-	display: flex;
-	align-items: center;
-	height: 100%;
-}
-
-@media (min-width: 576px) {
-	.container {
-		height: 80vh;
-		width: 80vh !important;
-	}
-}
-
-.board.small {
-	height: 80%;
-	width: 80%;
-	margin: 10% auto;
-	border-radius: 1rem;
-}
-
-.small {border-width: 1px !important;}
-
-.cell.small {
-	font-size: 2em;
-	text-align: center;
-}
-.form-check-input {cursor: pointer;}
-.allow {cursor: pointer;}
-.tt {transform: translate(-100%, 0);}
-
-
-.bg {background-color: var(--color-shine);}
-.bg-g {background-color: var(--color-shine-1);}
-.bg-0 {background-color: var(--color-win-oo);}
-.bg-1 {background-color: var(--color-win-xx);}
-.bi-circle, .oo {color: var(--color-oo);}
-.bi-x-lg {color: var(--color-xx);}
-.header {background-color: var(--color-header);}
-.ad {font-family: AD;}
-.top {border-bottom: 3px solid var(--color-text);}
-.bottom {border-top: 3px solid var(--color-text);}
-.left {border-right: 3px solid var(--color-text);}
-.right {border-left: 3px solid var(--color-text);}
-.cell.small:hover {background-color: rgb(189, 189, 189);}
-.btn-primary {
-	color: var(--color-text-r);
-	background-color: var(--color-primary);
-	border-color: var(--color-primary);
-}
-.btn-primary:hover {
-	color: var(--color-text-r);
-	background-color: var(--color-primary-h);
-	border-color: var(--color-primary-h);
-}
-.btn-secondary {
-	background-color: var(--color-secondary);
-	border-color: var(--color-secondary);
-}
-.modal-content {background-color: var(--color-bg-1);}
-.dropdown-menu {background-color:  var(--color-bg-2);}
-.dropdown-item {
-	color: var(--color-text);
-	opacity: var(--opacity-l)
-}
-.form-check-input:checked {background-color: var(--color-primary);}
-.form-check-input:focus {border-color: var(--color-primary);}
-.link-dark {color: var(--color-text);}
-.toast {
-	background-color: rgba(255, 255, 255, 0.95);
-	color: #000;
-}
-.btn-x {color: var(--color-text);}
-.bi-clipboard, .bi-check, .title {color: var(--color-primary);}
-.form-control {
-	background-color: var(--color-bg-2);
-	color: var(--color-text);
-}
-.form-control[readonly] {background-color: var(--color-bg-2);}
-.form-control:focus {
-	background-color: var(--color-bg-2);
-	color: var(--color-text);
-} 
-
+/****************** Dark theme color ******************/
 .dark {
 	--color-bg: #333333;
 	--color-bg-1: #555555;
@@ -143,7 +45,111 @@ main {
 	--opacity-s: 0.38;
 	--opacity-m: 0.6;
 	--opacity-l: 0.87;
-}
-/* #fdeaeaab,  #eafdeaa1*/
+} /* Backup color #fdeaeaab,  #eafdeaa1*/
 
-/* @media (prefers-color-scheme: dark) {} */
+/****************** Layout setting ******************/
+body {
+	padding-top: 4.5rem;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	opacity: var(--opacity-l);
+}
+html, body {
+	margin: 0;
+	height: 100%;
+}
+.header {background-color: var(--color-header);}
+main {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+.container {
+	width: 90vw !important;
+	height: 90vw;
+}
+/****************** RWD setting, to keep game board square at all time. ******************/
+@media (min-width: 576px) {
+	.container {
+		height: 80vh;
+		width: 80vh !important;
+	}
+}
+
+
+/****************** Board setting ******************/
+.board.small {
+	height: 80%;
+	width: 80%;
+	margin: 10% auto;
+	border-radius: 1rem;
+}
+.cell.small {
+	font-size: 2em;
+	text-align: center;
+}
+.cell.small:hover {background-color: rgb(189, 189, 189);}
+.row{height: 33.33%;}
+.allow {cursor: pointer;}
+.small {border-width: 1px !important;}
+.bg {background-color: var(--color-shine);}
+.bg-g {background-color: var(--color-shine-1);}
+.bg-0 {background-color: var(--color-win-oo);}
+.bg-1 {background-color: var(--color-win-xx);}
+.bi-circle, .oo {color: var(--color-oo);}
+.bi-x-lg {color: var(--color-xx);}
+/* Board border */
+.top {border-bottom: 3px solid var(--color-text);}
+.bottom {border-top: 3px solid var(--color-text);}
+.left {border-right: 3px solid var(--color-text);}
+.right {border-left: 3px solid var(--color-text);}
+
+/****************** Element Color setting ******************/
+/******** Buttons *********/
+.btn-primary {
+	color: var(--color-text-r);
+	background-color: var(--color-primary);
+	border-color: var(--color-primary);
+}
+.btn-primary:hover {
+	color: var(--color-text-r);
+	background-color: var(--color-primary-h);
+	border-color: var(--color-primary-h);
+}
+.btn-secondary {
+	background-color: var(--color-secondary);
+	border-color: var(--color-secondary);
+}
+
+/******** Modal *********/
+.modal-content {background-color: var(--color-bg-1);}
+.link-dark {color: var(--color-text);}
+.btn-x {color: var(--color-text);}
+.bi-clipboard, .bi-check, .title {color: var(--color-primary);}
+
+/******** Drop down menu *********/
+.tt {transform: translate(-100%, 0);} /* For second layer menu placement */
+.dropdown-menu {background-color:  var(--color-bg-2);}
+.dropdown-item {
+	color: var(--color-text);
+	opacity: var(--opacity-l)
+}
+
+/******** Form *********/
+.form-check-input {cursor: pointer;}
+.form-check-input:checked {background-color: var(--color-primary);}
+.form-check-input:focus {border-color: var(--color-primary);}
+.form-control[readonly] {background-color: var(--color-bg-2);}
+.form-control:focus {
+	background-color: var(--color-bg-2);
+	color: var(--color-text);
+} 
+.form-control {
+	background-color: var(--color-bg-2);
+	color: var(--color-text);
+}
+/******** Toast *********/
+.toast {
+	background-color: rgba(255, 255, 255, 0.95);
+	color: #000;
+}

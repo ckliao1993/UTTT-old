@@ -6,8 +6,6 @@ import { getDatabase,
     onValue,
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
-// import * as htmlToImage from 'https://cdn.jsdelivr.net/npm/html-to-image@1.9.0/lib/index.min.js';
-// import { toPng, toJpeg } from 'https://cdn.jsdelivr.net/npm/html-to-image@1.9.0/lib/index.min.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -232,11 +230,6 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 			$('#m_win').modal('show');
 		});		
 	} else {
-		for(let k = 0; k<80; k += 9){
-			let win = checkGame(game.moves.slice(k, k+9));
-			if(win){game.sets[board] = win;}
-			board ++;
-		}
 		checkUserStatus(game);
 	}
 	game.sets.forEach((value, index)=>{
