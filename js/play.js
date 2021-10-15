@@ -71,7 +71,7 @@ $('div.cell.small').click((event)=>{
 		toast("現在是對手" + other + "的回合");
 		return;
 	}
-	if($(event.target).is('i')){
+	if($(event.target).is('svg')){
 		toast("想幹嘛?");
 		return;
 	}
