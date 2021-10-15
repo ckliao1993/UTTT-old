@@ -6,6 +6,8 @@ import { getDatabase,
     onValue,
 } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
 import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.1.1/firebase-auth.js";
+// import * as htmlToImage from 'https://cdn.jsdelivr.net/npm/html-to-image@1.9.0/lib/index.min.js';
+// import { toPng, toJpeg } from 'https://cdn.jsdelivr.net/npm/html-to-image@1.9.0/lib/index.min.js';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -82,8 +84,14 @@ $('div.cell.small').click((event)=>{
 	}
 });
 
+$('#btn_view_game').click(()=>{
+	html2canvas(document.querySelector("body")).then(canvas => {
+		document.body.appendChild(canvas)
+	});
+});
+
 // Copy icon click action
-$('#btn_copy').click(function(){
+$('#btn_copy').click(()=>{
 	$(this).find('i').toggleClass('bi-clipboard', false).toggleClass('bi-check', true);
 	$('#invite_link').select();
 	navigator.clipboard.writeText(url);
@@ -136,9 +144,6 @@ function light(player){
 			$("[data-boardno="+ game.next +"]").toggleClass('allow', true);
 		}
 		if(game.last<81){toast(other + " 下了一顆棋子");}
-	} else {
-		// It's not your turn, wait for it.
-		// toast("現在是 "+ other +" 的回合，請耐心等候");
 	}
 }
 
@@ -198,6 +203,7 @@ function toast(msg){
 	$('#t_container').append(html);
 	$("#" + id +'>.toast-body').append(msg);
 	$('#'+ id).toast('show');
+	$('.toast.hide').remove();
 }
 
 // Listen on database change
@@ -205,23 +211,18 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 	$('#m_loading').modal('hide');
 	$('#msg_user').html("<span class='oo'>" + snapshot.val().p1.split('@')[0] + "</span> 想要挑戰你");
 
-	// Trying draw all pieces every time.
+	// Draw all pieces every time.
 	let board = 0;
 	game = snapshot.val();
 	game.sets = game.sets.split(',');
 	game.moves = game.moves.split(',');
 
-	for(let i in game.moves){
-		if(game.moves[i]){
-			game.moves[i] = parseInt(game.moves[i]);
-			draw(game.moves[i], i);
+	game.moves.forEach((value, index)=>{
+		if(value){
+			value = parseInt(value);
+			draw(value, index);
 		}
-	}
-	// for(let k = 0; k<80; k += 9){
-	// 	let win = checkGame(game.moves.slice(k, k+9));
-	// 	if(win){game.sets[board] = win;}
-	// 	board ++;
-	// }
+	});
 	let winner = checkGame(game.sets);
 	if(winner){
 		$('#msg_color').text(winner ? "藍方獲勝!!": "紅方獲勝!!");
@@ -238,13 +239,12 @@ onValue(ref(database, '/games/' + game_id), (snapshot) => {
 		}
 		checkUserStatus(game);
 	}
-	for(let j in game.sets){
-		if(game.sets[j]){
-			game.sets[j] = parseInt(game.sets[j]);
-			$("[data-boardno="+ j +"]").toggleClass("bg-" + game.sets[j], true)
-			$("[data-boardno="+ j +"]").removeAttr("data-boardno");
+	game.sets.forEach((value, index)=>{
+		if(value){
+			value = parseInt(value);
+			$("[data-boardno="+ index +"]").toggleClass("bg-" + value, true)
+			$("[data-boardno="+ index +"]").removeAttr("data-boardno");
 		}
-	}
+	});
 	console.log(game);
-	// }
 });

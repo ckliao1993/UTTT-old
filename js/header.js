@@ -42,10 +42,13 @@ console.log(game_id);
 // Auth state
 onAuthStateChanged(auth, (user) => {
 	if (user) {
-		globalThis.userinfo = user;
+		userinfo = user;
 		// User is signed in, see docs for a list of available properties
 		$('#btn_to_signout').show();
 		$('#btn_to_login').hide();
+		if(!$('#name').length){
+			$('#btn_to_login').before('<a class="dropdown-item" id="name">'+userinfo.email.split('@')[0]+'</a>');
+		}
 	} else {
 		// User is signed out
 		$('#btn_to_signout').hide();
